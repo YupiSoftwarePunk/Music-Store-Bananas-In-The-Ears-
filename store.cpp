@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <string>
 #include <limits>
+#include <iomanip>
 
 #if defined(max)
 #undef max
@@ -30,10 +31,12 @@ std::string* passwordArr = new std::string[userCount]{ "admin", "user" };
 
 // Склад товаров (База данных товаров) -----------------------------------------------------
 int size = 10;
+int categorySize = 4;
 int* idArr = new int[size];
 int* countArr = new int[size];
 double* priceArr = new double[size];
 std::string* nameArr = new std::string[size];
+std::string* NameCategoryArr = new std::string[categorySize];
 //-------------------------------------------------------------------------------------------
 
 
@@ -44,10 +47,28 @@ void Start();
 bool Login();
 void ShopUserMenu();
 void ShopAdminMenu();
+void CreateStaticStorage();
+template <typename Any>
+void FillStorage(Any staticArr, Any dynamicArr, int size);
+void ShowCategoryStorage();
+void ShowStorage();
+void RefillStorage();
+// -------------------------------------------------------------------------------------------
 
-void main()
+int main()
 {
 	Start();
+
+
+	delete[]loginArr;
+	delete[] passwordArr;
+	delete[]idArr;
+	delete[]nameArr;
+	delete[]countArr;
+	delete[]priceArr;
+	delete[]NameCategoryArr;
+
+	return 0;
 }
 
 
@@ -62,10 +83,27 @@ void Start()
 		/*std::cin.ignore(std::numeric_limits<std::streamsize>::max());*/
 		if (isAdmin == true)
 		{
+			std::string choose;
+			do
+			{
+				std::cout << "1. Использовать готовый склад\n2. Создать новый склад\n";
+				std::cout << "Ввод: ";
+				std::getline(std::cin, choose, '\n');
+			} while (choose.size() > 1 || choose[0] < 49 || choose[0] > 50);
+
+			if (choose == "1")
+			{
+				CreateStaticStorage();
+			}
+			else
+			{
+				// динамический склад
+			}
 			ShopAdminMenu();
 		}
 		else
 		{
+			CreateStaticStorage();
 			ShopUserMenu();
 		}
 	}
@@ -108,112 +146,201 @@ bool Login()
 
 void ShopAdminMenu()
 {
-	std::string choose;
-	do
-	{
-		std::cout << "1. Начать продажу\n";
-		std::cout << "2. Показать склад\n";
-		std::cout << "3. Пополнить склад\n";
-		std::cout << "4. Списать со склада\n";
-		std::cout << "5. Изменить цену\n";
-		std::cout << "6. Изменить склад\n";
-		std::cout << "7. Изменить персонал\n";
-		std::cout << "8. Отчет о прибыли\n";
-		std::cout << "0. Закрыть смену\n";
-
-		std::cout << "Ввод: ";
-		std::getline(std::cin, choose, '\n');
-	} while (choose.size() > 1 || choose[0] < 48 || choose[0] > 56);
-
-	if (choose == "1")
+	while (true)
 	{
 
-	}
-	else if (choose == "2")
-	{
 
-	}
-	else if (choose == "3")
-	{
+		std::string choose;
+		do
+		{
+			std::cout << "1. Начать продажу\n";
+			std::cout << "2. Показать склад\n";
+			std::cout << "3. Пополнить склад\n";
+			std::cout << "4. Списать со склада\n";
+			std::cout << "5. Изменить цену\n";
+			std::cout << "6. Изменить склад\n";
+			std::cout << "7. Изменить персонал\n";
+			std::cout << "8. Отчет о прибыли\n";
+			std::cout << "0. Закрыть смену\n";
 
-	}
-	else if (choose == "4")
-	{
+			std::cout << "Ввод: ";
+			std::getline(std::cin, choose, '\n');
+			system("cls");
+		} while (choose.size() > 1 || choose[0] < 48 || choose[0] > 56);
 
-	}
-	else if (choose == "5")
-	{
+		if (choose == "1")
+		{
 
-	}
-	else if (choose == "6")
-	{
-		
-	}
-	else if (choose == "7")
-	{
+		}
+		else if (choose == "2")
+		{
+			ShowStorage();
+		}
+		else if (choose == "3")
+		{
 
-	}
-	else if (choose == "8")
-	{
+		}
+		else if (choose == "4")
+		{
 
-	}
-	else if (choose == "0")
-	{
+		}
+		else if (choose == "5")
+		{
 
-	}
-	else
-	{
-		std::cout << "Admin menu ERROR!!\n";
+		}
+		else if (choose == "6")
+		{
+
+		}
+		else if (choose == "7")
+		{
+
+		}
+		else if (choose == "8")
+		{
+
+		}
+		else if (choose == "0")
+		{
+			break;
+		}
+		else
+		{
+			std::cout << "Admin menu ERROR!!\n";
+		}
 	}
 }
 
 
 void ShopUserMenu()
 {
-	std::string choose;
-	do
-	{
-		std::cout << "1. Начать продажу\n";
-		std::cout << "2. Показать склад\n";
-		std::cout << "3. Пополнить склад\n";
-		std::cout << "4. Списать со склада\n";
-		std::cout << "5. Отчет о прибыли\n";
-		std::cout << "6. Закрыть смену\n";
-
-		std::cout << "Ввод: ";
-		std::getline(std::cin, choose, '\n');
-	} while (choose.size() > 1 || choose[0] < 48 || choose[0] > 54);
-
-	if (choose == "1")
+	while (true)
 	{
 
+
+		std::string choose;
+		do
+		{
+			std::cout << "1. Начать продажу\n";
+			std::cout << "2. Показать склад\n";
+			std::cout << "3. Пополнить склад\n";
+			std::cout << "4. Списать со склада\n";
+			std::cout << "5. Отчет о прибыли\n";
+			std::cout << "6. Закрыть смену\n";
+
+			std::cout << "Ввод: ";
+			std::getline(std::cin, choose, '\n');
+		} while (choose.size() > 1 || choose[0] < 48 || choose[0] > 54);
+
+		if (choose == "1")
+		{
+
+		}
+		else if (choose == "2")
+		{
+			ShowStorage();
+		}
+		else if (choose == "3")
+		{
+
+		}
+		else if (choose == "4")
+		{
+
+		}
+		else if (choose == "5")
+		{
+
+		}
+		else if (choose == "6")
+		{
+
+		}
+		else if (choose == "0")
+		{
+			break;
+		}
+		else
+		{
+			std::cout << "User menu ERROR!!\n";
+		}
 	}
-	else if (choose == "2")
-	{
+}
 
-	}
-	else if (choose == "3")
-	{
 
-	}
-	else if (choose == "4")
-	{
+void CreateStaticStorage()
+{
+	const int staticSize = 10;
+	const int categoryStaticSize = 4;
 
-	}
-	else if (choose == "5")
-	{
+	int idStaticArr[staticSize]{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-	}
-	else if (choose == "6")
+	std::string CategoryArr[categoryStaticSize]
 	{
+		"Наушники полноразмерные проводные", "Наушники IEM проводные", "ЦАПы стационарные", "Беспроводные наушники"
+	};
 
-	}
-	else if (choose == "0")
+	std::string nameStaticArr[staticSize]
 	{
+		"Sennheiser HD 650", "HIFIMAN Ananda Nano", "Sony MDR-7506", "TRN Medusa", "FiiO JD1", "KZ PR2", "Tempotec March III-M3", "FiiO K11",
+		"OnePlus Buds 3", "Bowers & Wilkins Px7"
+	};
+	int countStaticArr[staticSize]{ 10, 15, 20, 50, 60, 40, 25, 15, 8, 10 };
+	double priceStaticArr[staticSize]{ 54890.0, 59990.0, 11990.0, 4900.0, 1990.0, 4500.0, 13800.0, 16890.0, 8000.0, 60000.0 };
 
-	}
-	else
+	FillStorage(idStaticArr, idArr, staticSize);
+	FillStorage(nameStaticArr, nameArr, staticSize);
+	FillStorage(countStaticArr, countArr, staticSize);
+	FillStorage(priceStaticArr, priceArr, staticSize);
+	FillStorage(CategoryArr, NameCategoryArr, categoryStaticSize);
+}
+
+
+template <typename Any>
+void FillStorage(Any staticArr, Any dynamicArr, int size)
+{
+	for (int i = 0; i < size; i++)
 	{
-		std::cout << "User menu ERROR!!\n";
+		dynamicArr[i] = staticArr[i];
 	}
+}
+
+
+void ShowStorage()
+{
+	std::cout << "ID\tНазвание\t\t\tКоличество\tЦена\n";
+	/*int temp = 3;
+	for (int i = 0; i < 4; i++)
+	{
+		std::cout << cat[i];
+		for (int j = 0; j < temp; j++)
+		{
+			std::cout
+		}
+
+	}*/
+
+	for (int i = 0; i < size; i++)
+	{
+		std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+	}
+}
+
+void ShowCategoryStorage()
+{
+	std::cout << "Категории\n";
+	for (int i = 0; i < categorySize; i++)
+	{
+		std::cout << NameCategoryArr[i] << "\t";
+	}
+}
+
+void RefillStorage()
+{
+	std::string idStr;
+	std::cout << "Пополнение склада\nВведите ID товара: ";
+	std::getline(std::cin, idStr, '\n');
+
+	int id = std::stoi(idStr);
+	std::cout << idArr[id - 1] << "\t" << nameArr[id - 1] << "\t";
 }
