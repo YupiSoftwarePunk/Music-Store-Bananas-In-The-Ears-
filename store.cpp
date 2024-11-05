@@ -174,7 +174,8 @@ void ShopAdminMenu()
 		}
 		else if (choose == "2")
 		{
-			ShowStorage();
+			ShowCategoryStorage();
+			/*ShowStorage();*/
 		}
 		else if (choose == "3")
 		{
@@ -277,13 +278,13 @@ void CreateStaticStorage()
 
 	std::string CategoryArr[categoryStaticSize]
 	{
-		"Наушники полноразмерные проводные", "Наушники IEM проводные", "ЦАПы стационарные", "Беспроводные наушники"
+		"1. Наушники полноразмерные проводные", "2. Наушники IEM проводные", "3. ЦАПы стационарные", "4. Беспроводные наушники"
 	};
 
 	std::string nameStaticArr[staticSize]
 	{
-		"Sennheiser HD 650", "HIFIMAN Ananda Nano", "Sony MDR-7506", "TRN Medusa", "FiiO JD1", "KZ PR2", "Tempotec March III-M3", "FiiO K11",
-		"OnePlus Buds 3", "Bowers & Wilkins Px7"
+		"Sennheiser HD 650", "HIFIMAN Ananda Nano", "Sony MDR-7506", "TRN Medusa", "FiiO JD1", "KZ PR2", "Tempotec March III-M3",
+		"FiiO K11", "OnePlus Buds 3", "Bowers & Wilkins Px7"
 	};
 	int countStaticArr[staticSize]{ 10, 15, 20, 50, 60, 40, 25, 15, 8, 10 };
 	double priceStaticArr[staticSize]{ 54890.0, 59990.0, 11990.0, 4900.0, 1990.0, 4500.0, 13800.0, 16890.0, 8000.0, 60000.0 };
@@ -309,16 +310,6 @@ void FillStorage(Any staticArr, Any dynamicArr, int size)
 void ShowStorage()
 {
 	std::cout << "ID\tНазвание\t\t\tКоличество\tЦена\n";
-	/*int temp = 3;
-	for (int i = 0; i < 4; i++)
-	{
-		std::cout << cat[i];
-		for (int j = 0; j < temp; j++)
-		{
-			std::cout
-		}
-
-	}*/
 
 	for (int i = 0; i < size; i++)
 	{
@@ -328,10 +319,45 @@ void ShowStorage()
 
 void ShowCategoryStorage()
 {
+	char numberCategory;
 	std::cout << "Категории\n";
 	for (int i = 0; i < categorySize; i++)
 	{
-		std::cout << NameCategoryArr[i] << "\t";
+		std::cout << NameCategoryArr[i] << "\n";
+	}
+
+	std::cout << "\nВведите номер нужной категории товаров: ";
+	std::cin >> numberCategory;
+
+	if (numberCategory == '1')
+	{
+		std::cout << "ID\tНазвание\t\t\tКоличество\tЦена\n";
+
+		for (int i = 0; i < 3; i++)
+		{
+			std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+		}
+	}
+	else if (numberCategory == '2')
+	{
+		for (int i = 3; i < 6; i++)
+		{
+			std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+		}
+	}
+	else if (numberCategory == '3')
+	{
+		for (int i = 6; i < 8; i++)
+		{
+			std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+		}
+	}
+	else if (numberCategory == '4')
+	{
+		for (int i = 8; i < 10; i++)
+		{
+			std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+		}
 	}
 }
 
