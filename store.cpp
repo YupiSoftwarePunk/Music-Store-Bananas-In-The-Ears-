@@ -59,6 +59,7 @@ void CgangePrice();
 void ChangeStaff();
 void AddEmployee();
 void StaffReduct();
+void RemoveStaff();
 // -------------------------------------------------------------------------------------------
 
 int main()
@@ -201,11 +202,11 @@ void ShopAdminMenu()
 		}
 		else if (choose == "7")
 		{
-			AddEmployee();
+			ChangeStaff();
 		}
 		else if (choose == "8")
 		{
-			StaffReduct();
+			
 		}
 		else if (choose == "0")
 		{
@@ -677,11 +678,11 @@ void ChangeStaff()
 		}
 		else if (choose == "2")
 		{
-
+			StaffReduct();
 		}
 		else if (choose == "3")
 		{
-
+			RemoveStaff();
 		}
 		else if (choose == "0")
 		{
@@ -761,6 +762,82 @@ void StaffReduct()
 					std::cout << "Нет сотрудника с таким ID\n";
 				}
 			}
+		}
+		else
+		{
+			std::cout << "Ошибка ввода!!\n\n";
+		}
+
+	}
+}
+
+
+void RemoveStaff()
+{
+	std::string* tempLogin = new std::string[userCount];
+	std::string* tempPass = new std::string[userCount];
+
+	for (int i = 0; i < userCount; i++)
+	{
+		tempLogin[i] = loginArr[i];
+		tempPass[i] = passwordArr[i];
+	}
+
+	delete[]loginArr;
+	delete[]passwordArr;
+
+	userCount--;
+	loginArr = new std::string[userCount];
+	passwordArr = new std::string[userCount];
+
+
+	std::string choose;
+	int empId;
+	while (true)
+	{
+		std::cout << "Введите ID сотрудника:\t 0. Выход\nВвод: ";
+		std::getline(std::cin, choose, '\n');
+
+		if (choose == "0")
+		{
+			break;
+		}
+		else if (isStringDigit(choose))
+		{
+			empId = std::stoi(choose);
+
+			std::string* tempLogin = new std::string[userCount];
+			std::string* tempPass = new std::string[userCount];
+
+			for (int i = 0; i < userCount; i++)
+			{
+				tempLogin[i] = loginArr[i];
+				tempPass[i] = passwordArr[i];
+			}
+
+			delete[]loginArr;
+			delete[]passwordArr;
+			userCount--;
+			loginArr = new std::string[userCount];
+			passwordArr = new std::string[userCount];
+
+
+			for (int i = 0, j = 0; i < userCount, j < userCount; i++, j++)
+			{
+				if (i == empId - 1)
+				{
+					i++;
+					loginArr[j] = tempLogin[i];
+					passwordArr[j] = tempPass[i];
+				}
+				else
+				{
+					loginArr[j] = tempLogin[i];
+					passwordArr[j] = tempPass[i];
+				}
+			}
+
+			break;
 		}
 		else
 		{
