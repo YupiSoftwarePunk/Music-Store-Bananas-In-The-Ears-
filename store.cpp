@@ -695,6 +695,12 @@ void AddEmployee()
 	std::cout << "Введите пароль нового сотрудника: ";
 	std::getline(std::cin, newPass, '\n');
 
+	for (int i = 0; i < userCount; i++)
+	{
+		tempLogin[i] = loginArr[i];
+		tempPass[i] = passwordArr[i];
+	}
+
 	tempLogin[userCount - 1] = newLogin;
 	tempPass[userCount - 1] = newPass;
 
