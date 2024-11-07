@@ -196,11 +196,11 @@ void ShopAdminMenu()
 		}
 		else if (choose == "6")
 		{
-
+			RemoveFromStorage();
 		}
 		else if (choose == "7")
 		{
-
+			AddEmployee();
 		}
 		else if (choose == "8")
 		{
@@ -666,7 +666,7 @@ void ChangeStaff()
 
 		if (choose == "1")
 		{
-
+			AddEmployee();
 		}
 		else if (choose == "2")
 		{
@@ -685,5 +685,22 @@ void ChangeStaff()
 
 void AddEmployee()
 {
-	// доделать
+	userCount++;
+	std::string* tempLogin = new std::string[userCount];
+	std::string* tempPass = new std::string[userCount];
+
+	std::string newLogin, newPass;
+	std::cout << "Введите логин нового сотрудника: ";
+	std::getline(std::cin, newLogin, '\n');
+	std::cout << "Введите пароль нового сотрудника: ";
+	std::getline(std::cin, newPass, '\n');
+
+	tempLogin[userCount - 1] = newLogin;
+	tempPass[userCount - 1] = newPass;
+
+	std::swap(loginArr, tempLogin);
+	std::swap(passwordArr, tempPass);
+
+	delete []loginArr;
+	delete []passwordArr;
 }
