@@ -60,6 +60,7 @@ void ChangeStaff();
 void AddEmployee();
 void StaffReduct();
 void RemoveStaff();
+void StorageReduct();
 // -------------------------------------------------------------------------------------------
 
 int main()
@@ -845,4 +846,10 @@ void RemoveStaff()
 		}
 
 	}
+}
+
+
+void StorageReduct()
+{
+	// на некст паре будем это делать
 }
