@@ -694,9 +694,27 @@ void ChangeStaff()
 
 void AddEmployee()
 {
-	userCount++;
 	std::string* tempLogin = new std::string[userCount];
 	std::string* tempPass = new std::string[userCount];
+	for (int i = 0; i < userCount; i++)
+	{
+		tempLogin[i] = loginArr[i];
+		tempPass[i] = passwordArr[i];
+	}
+
+	delete[]loginArr;
+	delete[]passwordArr;
+
+	userCount++;
+
+	loginArr = new std::string[userCount];
+	passwordArr = new std::string[userCount];
+
+	for (int i = 0; i < userCount; i++)
+	{
+		loginArr[i] = tempLogin[i];
+		passwordArr[i] = tempPass[i];
+	}
 
 	std::string newLogin, newPass;
 	std::cout << "Введите логин нового сотрудника: ";
@@ -704,20 +722,11 @@ void AddEmployee()
 	std::cout << "Введите пароль нового сотрудника: ";
 	std::getline(std::cin, newPass, '\n');
 
-	for (int i = 0; i < userCount; i++)
-	{
-		tempLogin[i] = loginArr[i];
-		tempPass[i] = passwordArr[i];
-	}
+	loginArr[userCount - 1] = newLogin;
+	passwordArr[userCount - 1] = newPass;
 
-	tempLogin[userCount - 1] = newLogin;
-	tempPass[userCount - 1] = newPass;
-
-	std::swap(loginArr, tempLogin);
-	std::swap(passwordArr, tempPass);
-
-	delete []loginArr;
-	delete []passwordArr;
+	delete[]tempLogin;
+	delete[]tempPass;
 }
 
 void StaffReduct()
