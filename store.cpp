@@ -327,44 +327,58 @@ void ShowStorage()
 
 void ShowCategoryStorage()
 {
-	char numberCategory;
-	std::cout << "Категории\n";
-	for (int i = 0; i < categorySize; i++)
+	while (true)
 	{
-		std::cout << NameCategoryArr[i] << "\n";
-	}
 
-	std::cout << "\nВведите номер нужной категории товаров: ";
-	std::cin >> numberCategory;
 
-	if (numberCategory == '1')
-	{
-		std::cout << "ID\tНазвание\t\t\tКоличество\tЦена\n";
+		std::string choose;
+		std::cout << "Категории\n\n";
+		for (int i = 0; i < categorySize; i++)
+		{
+			std::cout << NameCategoryArr[i] << "\n";
+		}
 
-		for (int i = 0; i < 3; i++)
+		std::cout << "\nВведите номер нужной категории товаров:\t0 - Выход\nВвод: ";
+		std::cin >> choose;
+
+		std::cout << "ID\tНазвание\t\tКоличество\tЦена\n";
+
+		if (choose == "1")
 		{
-			std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+
+			for (int i = 0; i < 3; i++)
+			{
+				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+			}
 		}
-	}
-	else if (numberCategory == '2')
-	{
-		for (int i = 3; i < 6; i++)
+		else if (choose == "2")
 		{
-			std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+			for (int i = 3; i < 6; i++)
+			{
+				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+			}
 		}
-	}
-	else if (numberCategory == '3')
-	{
-		for (int i = 6; i < 8; i++)
+		else if (choose == "3")
 		{
-			std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+			for (int i = 6; i < 8; i++)
+			{
+				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+			}
 		}
-	}
-	else if (numberCategory == '4')
-	{
-		for (int i = 8; i < 10; i++)
+		else if (choose == "4")
 		{
-			std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+			for (int i = 8; i < 10; i++)
+			{
+				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+			}
+		}
+		else if (choose == "0")
+		{
+			break;
+		}
+		else
+		{
+			std::cout << "\n\nТакого номера категории не существует!!\n\n";
 		}
 	}
 }
