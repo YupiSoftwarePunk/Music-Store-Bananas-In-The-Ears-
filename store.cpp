@@ -58,6 +58,7 @@ void RemoveFromStorage();
 void CgangePrice();
 void ChangeStaff();
 void AddEmployee();
+void StaffReduct();
 // -------------------------------------------------------------------------------------------
 
 int main()
@@ -204,7 +205,7 @@ void ShopAdminMenu()
 		}
 		else if (choose == "8")
 		{
-
+			StaffReduct();
 		}
 		else if (choose == "0")
 		{
@@ -661,7 +662,13 @@ void ChangeStaff()
 
 	while (true)
 	{
-		std::cout << "1. Добавить нового сотрудника\n2. Отредактировать сотрудника\n3 - Удалить сотрудника\n0. Выход\n\nВвод: ";
+		std::cout << "ID\tЛогин\tПароль ";
+		for (int i = 0; i < userCount; i++)
+		{
+			std::cout << i + 1 << "\t" << std::left << std::setw(10) << loginArr[i] << "\t" << passwordArr[i] << "\n";
+		}
+
+		std::cout << "\n1. Добавить нового сотрудника\n2. Отредактировать сотрудника\n3 - Удалить сотрудника\n0. Выход\n\nВвод: ";
 		std::getline(std::cin, choose, '\n');
 
 		if (choose == "1")
@@ -709,4 +716,56 @@ void AddEmployee()
 
 	delete []loginArr;
 	delete []passwordArr;
+}
+
+void StaffReduct()
+{
+	std::string choose, newLogin, newPass;
+	int empId;
+	while (true)
+	{
+
+
+		std::cout << "ID\tЛогин\tПароль ";
+		for (int i = 0; i < userCount; i++)
+		{
+			std::cout << i + 1 << "\t" << std::left << std::setw(10) << loginArr[i] << "\t" << passwordArr[i] << "\n";
+		}
+
+		std::cout << "Введите ID сотрудника:\t 0. Выход\nВвод: ";
+		std::getline(std::cin, choose, '\n');
+
+		if (choose == "0")
+		{
+			break;
+		}
+		else if (isStringDigit(choose))
+		{
+			empId = std::stoi(choose);
+			for (int i = 0; i < userCount; i++)
+			{
+				if (i == empId -1)
+				{
+					std::cout << "Введите новый логин: ";
+					std::getline(std::cin, newLogin, '\n');
+					std::cout << "Введите новый пароль: ";
+					std::getline(std::cin, newPass, '\n');
+
+					loginArr[i] = newLogin;
+					passwordArr[i] = newPass;
+
+					break;
+				}
+				else
+				{
+					std::cout << "Нет сотрудника с таким ID\n";
+				}
+			}
+		}
+		else
+		{
+			std::cout << "Ошибка ввода!!\n\n";
+		}
+
+	}
 }
