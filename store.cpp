@@ -554,7 +554,7 @@ void RemoveFromStorage()
 
 			if (choose == "1")
 			{
-				countArr[id - 1] += remove;
+				countArr[id - 1] -= remove;
 				std::cout << "Товар успешно списан\n\n";
 				exit = true;
 				break;
