@@ -207,7 +207,7 @@ void ShopAdminMenu()
 		}
 		else if (choose == "8")
 		{
-			
+
 		}
 		else if (choose == "0")
 		{
@@ -348,28 +348,28 @@ void ShowCategoryStorage()
 
 			for (int i = 0; i < 3; i++)
 			{
-				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t" << countArr[i] << std::left << std::setw(2) << "\t\t" << priceArr[i] << "\n";
 			}
 		}
 		else if (choose == "2")
 		{
 			for (int i = 3; i < 6; i++)
 			{
-				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t" << countArr[i] << std::left << std::setw(2) << "\t\t" << priceArr[i] << "\n";
 			}
 		}
 		else if (choose == "3")
 		{
 			for (int i = 6; i < 8; i++)
 			{
-				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t" << countArr[i] << std::left << std::setw(2) << "\t\t" << priceArr[i] << "\n";
 			}
 		}
 		else if (choose == "4")
 		{
 			for (int i = 8; i < 10; i++)
 			{
-				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
+				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t" << countArr[i] << std::left << std::setw(2) << "\t\t" << priceArr[i] << "\n";
 			}
 		}
 		else if (choose == "0")
@@ -533,7 +533,7 @@ void RemoveFromStorage()
 			{
 				remove = std::stoi(removeStr);
 
-				if (remove >= 0 && remove <= countArr[id -1])
+				if (remove >= 0 && remove <= countArr[id - 1])
 				{
 					break;
 				}
@@ -642,13 +642,13 @@ void CgangePrice()
 		while (true)
 		{
 
-			std::cout << "Назначить " << nameArr[id -1] << " новую цену " << newPrice << " ?";
+			std::cout << "Назначить " << nameArr[id - 1] << " новую цену " << newPrice << " ?";
 			std::cout << "1 - Да\t2 - Нет\t3 - Отмена\n\n";
 			std::getline(std::cin, choose, '\n');
 
 			if (choose == "1")
 			{
-				countArr[id - 1] = newPrice;
+				priceArr[id - 1] = newPrice;
 				std::cout << "Цена успешно изменена\n\n";
 				exit = true;
 				break;
@@ -769,7 +769,7 @@ void StaffReduct()
 			empId = std::stoi(choose);
 			for (int i = 0; i < userCount; i++)
 			{
-				if (i == empId -1)
+				if (i == empId - 1)
 				{
 					std::cout << "Введите новый логин: ";
 					std::getline(std::cin, newLogin, '\n');
