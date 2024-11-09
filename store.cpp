@@ -690,15 +690,15 @@ void ChangeStaff()
 
 		if (choose == "1")
 		{
-			AddEmployee();
+			AddEmployee(); // ошибка
 		}
 		else if (choose == "2")
 		{
-			StaffReduct();
+			StaffReduct(); // ошибка
 		}
 		else if (choose == "3")
 		{
-			RemoveStaff();
+			RemoveStaff(); // ошибка
 		}
 		else if (choose == "0")
 		{
@@ -827,7 +827,7 @@ void RemoveStaff()
 		std::cout << "\nID\n";
 		for (int i = 0; i < userCount; i++)
 		{
-			std::cout << i + 1 <<"\n";
+			std::cout << i + 1 << "\n";
 		}
 
 
