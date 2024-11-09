@@ -604,7 +604,7 @@ void CgangePrice()
 			}
 			else
 			{
-				std::cout << "Ошибка ввода!!\n";
+				std::cout << "Ошибка ввода!!\n\n";
 			}
 			if (id > 0 && id <= size)
 			{
@@ -612,7 +612,7 @@ void CgangePrice()
 			}
 			else
 			{
-				std::cout << "Неверный ID\n";
+				std::cout << "Неверный ID\n\n";
 			}
 		}
 
@@ -634,7 +634,7 @@ void CgangePrice()
 
 				else
 				{
-					std::cout << "Некоректная цена!!!\n";
+					std::cout << "Некоректная цена!!!\n\n";
 				}
 			}
 		}
@@ -664,7 +664,7 @@ void CgangePrice()
 			}
 			else
 			{
-				std::cout << "Ошибка ввода!!\n";
+				std::cout << "Ошибка ввода!!\n\n";
 			}
 		}
 	}
@@ -678,13 +678,14 @@ void ChangeStaff()
 
 	while (true)
 	{
-		std::cout << "ID\tЛогин\tПароль ";
+		std::cout << "ID\tЛогин\t\tПароль ";
 		for (int i = 0; i < userCount; i++)
 		{
-			std::cout << i + 1 << "\t" << std::left << std::setw(10) << loginArr[i] << "\t" << passwordArr[i] << "\n";
+			std::cout << "\n" << i + 1 << "\t" << std::left << std::setw(10) << loginArr[i] << "\t" << passwordArr[i];
 		}
 
-		std::cout << "\n1. Добавить нового сотрудника\n2. Отредактировать сотрудника\n3 - Удалить сотрудника\n0. Выход\n\nВвод: ";
+
+		std::cout << "\n\n1. Добавить нового сотрудника\n2. Отредактировать сотрудника\n3 - Удалить сотрудника\n0. Выход\n\nВвод: ";
 		std::getline(std::cin, choose, '\n');
 
 		if (choose == "1")
@@ -702,6 +703,10 @@ void ChangeStaff()
 		else if (choose == "0")
 		{
 			break;
+		}
+		else
+		{
+			std::cout << "Ошибка ввода!!\n\n";
 		}
 	}
 }
@@ -751,13 +756,13 @@ void StaffReduct()
 	{
 
 
-		std::cout << "ID\tЛогин\tПароль ";
+		std::cout << "ID\tЛогин\t\tПароль ";
 		for (int i = 0; i < userCount; i++)
 		{
-			std::cout << i + 1 << "\t" << std::left << std::setw(10) << loginArr[i] << "\t" << passwordArr[i] << "\n";
+			std::cout << "\n" << i + 1 << "\t" << std::left << std::setw(10) << loginArr[i] << "\t" << passwordArr[i];
 		}
 
-		std::cout << "Введите ID сотрудника:\t 0. Выход\nВвод: ";
+		std::cout << "\n\nВведите ID сотрудника:\t 0 - Выход\nВвод: ";
 		std::getline(std::cin, choose, '\n');
 
 		if (choose == "0")
@@ -798,7 +803,7 @@ void StaffReduct()
 
 void RemoveStaff()
 {
-	std::string* tempLogin = new std::string[userCount];
+	/*std::string* tempLogin = new std::string[userCount];
 	std::string* tempPass = new std::string[userCount];
 
 	for (int i = 0; i < userCount; i++)
@@ -812,15 +817,23 @@ void RemoveStaff()
 
 	userCount--;
 	loginArr = new std::string[userCount];
-	passwordArr = new std::string[userCount];
+	passwordArr = new std::string[userCount];*/
 
 
 	std::string choose;
 	int empId;
 	while (true)
 	{
-		std::cout << "Введите ID сотрудника:\t 0. Выход\nВвод: ";
+		std::cout << "\nID\n";
+		for (int i = 0; i < userCount; i++)
+		{
+			std::cout << i + 1 <<"\n";
+		}
+
+
+		std::cout << "\n\nВведите ID сотрудника:\t0 - Выход\nВвод: ";
 		std::getline(std::cin, choose, '\n');
+
 
 		if (choose == "0")
 		{
@@ -860,6 +873,8 @@ void RemoveStaff()
 					passwordArr[j] = tempPass[i];
 				}
 			}
+
+			std::cout << "\n\nСотрудник успешно удален!\n\n";
 
 			break;
 		}
