@@ -690,7 +690,7 @@ void ChangeStaff()
 
 		if (choose == "1")
 		{
-			AddEmployee(); // ошибка
+			AddEmployee(); 
 		}
 		else if (choose == "2")
 		{
@@ -698,7 +698,7 @@ void ChangeStaff()
 		}
 		else if (choose == "3")
 		{
-			RemoveStaff(); // ошибка
+			RemoveStaff(); // почти решена проблема
 		}
 		else if (choose == "0")
 		{
@@ -806,7 +806,7 @@ void StaffReduct()
 
 void RemoveStaff()
 {
-	std::string* tempLogin = new std::string[userCount];
+	/*std::string* tempLogin = new std::string[userCount];
 	std::string* tempPass = new std::string[userCount];
 
 	for (int i = 0; i < userCount; i++)
@@ -820,7 +820,7 @@ void RemoveStaff()
 
 	userCount--;
 	loginArr = new std::string[userCount];
-	passwordArr = new std::string[userCount];
+	passwordArr = new std::string[userCount];*/
 
 
 	std::string choose;
@@ -834,7 +834,7 @@ void RemoveStaff()
 		}
 
 
-		std::cout << "\n\nВведите ID сотрудника:\t0 - Выход\nВвод: ";
+		std::cout << "\n\nВведите ID сотрудника для удаления:\t0 - Выход\nВвод: ";
 		std::getline(std::cin, choose, '\n');
 
 
@@ -867,8 +867,8 @@ void RemoveStaff()
 				if (i == empId - 1)
 				{
 					i++;
-					loginArr[j] = tempLogin[i];
-					passwordArr[j] = tempPass[i];
+					loginArr[i] = tempLogin[i];
+					passwordArr[i] = tempPass[i];
 				}
 				else
 				{
