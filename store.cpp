@@ -694,7 +694,7 @@ void ChangeStaff()
 		}
 		else if (choose == "2")
 		{
-			StaffReduct(); // ошибка
+			StaffReduct(); 
 		}
 		else if (choose == "3")
 		{
@@ -729,7 +729,7 @@ void AddEmployee()
 	loginArr = new std::string[userCount];
 	passwordArr = new std::string[userCount];
 
-	for (int i = 0; i < userCount; i++)
+	for (int i = 0; i < userCount-1; i++)
 	{
 		loginArr[i] = tempLogin[i];
 		passwordArr[i] = tempPass[i];
@@ -774,6 +774,13 @@ void StaffReduct()
 			empId = std::stoi(choose);
 			for (int i = 0; i < userCount; i++)
 			{
+				if (empId < 1 || empId > userCount)
+				{
+					std::cout << "Нет сотрудника с таким ID\n\n";
+					break;
+				}
+
+
 				if (i == empId - 1)
 				{
 					std::cout << "Введите новый логин: ";
@@ -785,10 +792,6 @@ void StaffReduct()
 					passwordArr[i] = newPass;
 
 					break;
-				}
-				else
-				{
-					std::cout << "Нет сотрудника с таким ID\n";
 				}
 			}
 		}
@@ -803,7 +806,7 @@ void StaffReduct()
 
 void RemoveStaff()
 {
-	/*std::string* tempLogin = new std::string[userCount];
+	std::string* tempLogin = new std::string[userCount];
 	std::string* tempPass = new std::string[userCount];
 
 	for (int i = 0; i < userCount; i++)
@@ -817,7 +820,7 @@ void RemoveStaff()
 
 	userCount--;
 	loginArr = new std::string[userCount];
-	passwordArr = new std::string[userCount];*/
+	passwordArr = new std::string[userCount];
 
 
 	std::string choose;
