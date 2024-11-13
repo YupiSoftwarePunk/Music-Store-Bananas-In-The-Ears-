@@ -61,6 +61,8 @@ void AddEmployee();
 void StaffReduct();
 void RemoveStaff();
 void StorageReduct();
+void AddProduct();
+
 // -------------------------------------------------------------------------------------------
 
 int main()
@@ -199,7 +201,7 @@ void ShopAdminMenu()
 		}
 		else if (choose == "6")
 		{
-			RemoveFromStorage();
+			StorageReduct();
 		}
 		else if (choose == "7")
 		{
@@ -625,7 +627,7 @@ void CgangePrice()
 
 			if (isStringDigit(newPriceStr))
 			{
-				newPrice = std::stoi(newPriceStr);
+				newPrice = std::stod(newPriceStr);
 
 				if (price >= 0 && price <= 100000)
 				{
@@ -827,7 +829,7 @@ void RemoveStaff()
 		{
 			break;
 		}
-		else if (isStringDigit(choose))
+		else if (isStringDigit(choose) && choose != "1")
 		{
 			empId = std::stoi(choose);
 
@@ -884,5 +886,157 @@ void RemoveStaff()
 
 void StorageReduct()
 {
-	// на некст паре будем это делать
+	std::string choose;
+	std::cout << "Изменение склада магазина\n\n";
+
+	while (true)
+	{
+		std::cout << "1. Добавить новый товар\t2. Изменить название товара\t3. Удаление товара\n 0 - Выход\nВвод: ";
+		std::getline(std::cin, choose, '\n');
+		if (choose == "0")
+		{
+			break;
+		}
+		else if (choose == "1")
+		{
+			AddProduct();
+		}
+		else if (choose == "2")
+		{
+
+		}
+		else if (choose == "3")
+		{
+
+		}
+		else
+		{
+			std::cout << "Некорретный ввод\n\n";
+		}
+	}
+}
+
+
+
+void AddProduct()
+{
+	std::string choose12;
+	while (true)
+	{
+		std::cout << "1. Добавить новый товар\t0 - Выход\nВвод: ";
+		std::getline(std::cin, choose12, '\n');
+		if (choose12 == "0")
+		{
+			break;
+		}
+		else if (choose12 == "1")
+		{
+			int *tempId = new int[size];
+			int* tempCount = new int[size];
+			double* tempPrice = new double[size];
+			std::string* tempName = new std::string[size];
+			for (int i = 0; i < size; i++)
+			{
+				tempId[i] = idArr[i];
+				tempCount[i] = countArr[i];
+				tempPrice[i] = priceArr[i];
+				tempName[i] = nameArr[i];
+			}
+
+
+			delete[]idArr;
+			delete[]countArr;
+			delete[]priceArr;
+			delete[]nameArr;
+
+			size++;
+			idArr = new int[size];
+			countArr = new int[size];
+			priceArr = new double[size];
+			nameArr = new std::string[size];
+
+
+			for (int i = 0; i < size - 1; i++)
+			{
+				idArr[i] = tempId[i];
+				countArr[i] = tempCount[i];
+				priceArr[i] = tempPrice[i];
+				nameArr[i] =  tempName[i];
+			}
+
+			std::string newName, newCountStr, newPriceStr;
+
+			while (true)
+			{
+				std::cout << "Введите название нового товара: ";
+				std::getline(std::cin, newName, '\n');
+				if (newName.size() <= 30)
+				{
+					nameArr[size - 1] = newName;
+					break;
+				}
+				else
+				{
+					std::cout << "Слишком большое название\n\n";
+				}
+			}
+
+			while (true)
+			{
+				std::cout << "Введите количество нового товара: ";
+				std::getline(std::cin, newCountStr, '\n');
+
+				if (isStringDigit(newCountStr))
+				{
+					if (std::stoi(newCountStr)>= 0 && std::stoi(newCountStr)< 1000)
+					{
+						countArr[size - 1] = std::stoi(newCountStr);
+						break;
+					}
+				}
+				else
+				{
+					std::cout << "Некорректный ввод\n\n";
+				}
+
+			}
+
+
+			while (true)
+			{
+				std::cout << "Введите цену нового товара: ";
+				std::getline(std::cin, newPriceStr, '\n');
+
+				if (isStringDigit(newPriceStr))
+				{
+					if (std::stod(newPriceStr) >= 0 && std::stod(newPriceStr) < 100000)
+					{
+						priceArr[size - 1] = std::stod(newPriceStr);
+						break;
+					}
+				}
+				else
+				{
+					std::cout << "Некорректный ввод\n\n";
+				}
+
+			}
+
+			idArr[size - 1] = size;
+
+			std::cout << "\n\n" << idArr[size - 1] << "\t" << std::left << std::setw(30) << nameArr[size - 1] << "\t" <<
+				countArr[size - 1] << "\t" << priceArr[size - 1] << "\n" << "Новый товар успешно добавлен\n\n";
+
+
+
+			delete[]tempId;
+			delete[]tempCount;
+			delete[]tempPrice;
+			delete[]tempName;
+		}
+		else
+		{
+			std::cout << "\nНекорректный ввод\n\n";
+		}
+	}
 }
