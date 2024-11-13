@@ -698,7 +698,7 @@ void ChangeStaff()
 		}
 		else if (choose == "3")
 		{
-			RemoveStaff(); // почти решена проблема
+			RemoveStaff(); 
 		}
 		else if (choose == "0")
 		{
@@ -806,21 +806,6 @@ void StaffReduct()
 
 void RemoveStaff()
 {
-	/*std::string* tempLogin = new std::string[userCount];
-	std::string* tempPass = new std::string[userCount];
-
-	for (int i = 0; i < userCount; i++)
-	{
-		tempLogin[i] = loginArr[i];
-		tempPass[i] = passwordArr[i];
-	}
-
-	delete[]loginArr;
-	delete[]passwordArr;
-
-	userCount--;
-	loginArr = new std::string[userCount];
-	passwordArr = new std::string[userCount];*/
 
 
 	std::string choose;
@@ -846,6 +831,13 @@ void RemoveStaff()
 		{
 			empId = std::stoi(choose);
 
+
+			if (empId < 1 || empId > userCount)
+			{
+				std::cout << "Неверный ID!!!\n\n"; 
+				break;
+			}
+
 			std::string* tempLogin = new std::string[userCount];
 			std::string* tempPass = new std::string[userCount];
 
@@ -867,8 +859,8 @@ void RemoveStaff()
 				if (i == empId - 1)
 				{
 					i++;
-					loginArr[i] = tempLogin[i];
-					passwordArr[i] = tempPass[i];
+					loginArr[j] = tempLogin[i];
+					passwordArr[j] = tempPass[i];
 				}
 				else
 				{
