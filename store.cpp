@@ -41,6 +41,16 @@ std::string* NameCategoryArr = new std::string[categorySize];
 
 
 
+// Чек -----------------------------------------------------
+int sizeCheck = 1;
+int* countCheckArr = new int[sizeCheck];
+double* priceCheckArr = new double[sizeCheck];
+double* totalPriceCheckArr = new double[sizeCheck];
+std::string* nameCheckArr = new std::string[sizeCheck];
+//-------------------------------------------------------------------------------------------
+
+
+
 
 // Функции-----------------------------------------------------------------------------------
 void Start();
@@ -49,20 +59,32 @@ void ShopUserMenu();
 void ShopAdminMenu();
 void CreateStaticStorage();
 template <typename Any>
+
 void FillStorage(Any staticArr, Any dynamicArr, int size);
+
 void ShowCategoryStorage();
+
 void ShowStorage();
+
 void RefillStorage();
 bool isStringDigit(std::string);
 void RemoveFromStorage();
 void CgangePrice();
+
 void ChangeStaff();
 void AddEmployee();
 void StaffReduct();
 void RemoveStaff();
+
 void StorageReduct();
 void AddProduct();
+void RenameProduct();
+void DeleteProduct();
 
+void Selling();
+
+
+void CreateDynamicStorage();
 // -------------------------------------------------------------------------------------------
 
 int main()
@@ -107,7 +129,7 @@ void Start()
 			}
 			else
 			{
-				// динамический склад
+				// динамический склад   CreateDynamicStorage();
 			}
 			ShopAdminMenu();
 		}
@@ -903,11 +925,11 @@ void StorageReduct()
 		}
 		else if (choose == "2")
 		{
-
+			RenameProduct();
 		}
 		else if (choose == "3")
 		{
-
+			DeleteProduct();
 		}
 		else
 		{
@@ -1039,4 +1061,172 @@ void AddProduct()
 			std::cout << "\nНекорректный ввод\n\n";
 		}
 	}
+}
+
+
+
+void RenameProduct()
+{
+	std::string choose;
+	std::string idStr, newName;
+	int id{};
+	while (true)
+	{
+		std::cout << "1 - Изменить название\t0 - Выход\nВвод: ";
+		std::getline(std::cin, choose, '\n');
+
+		if (choose == "0")
+		{
+			break;
+		}
+		else if (choose == "1")
+		{
+			while (true)
+			{
+				std::cout << "Введите ID: ";
+				std::getline(std::cin, idStr, '\n');
+
+				if (isStringDigit(idStr))
+				{
+					id = std::stoi(idStr);
+					if (id > 0 && id <= size)
+					{
+						break;
+					}
+					else
+					{
+						std::cout << "Некорректный ID!!\n\n";
+					}
+				}
+			}
+			while (true)
+			{
+				std::cout << "\n\n" << idArr[id - 1] << "\t" << std::left << std::setw(30) << nameArr[id - 1] << "\n\n";
+				std::cout << "Введите новое название товара: ";
+				std::getline(std::cin, newName, '\n');
+				if (newName.size() <= 30)
+				{
+					nameArr[id - 1] = newName;
+					break;
+				}
+				else
+				{
+					std::cout << "Максимальная длина названия 30 исмволов\n\n";
+				}
+			}
+
+			std::cout << "\n\n" << idArr[id - 1] << "\t" << std::left << std::setw(30) << nameArr[id - 1] << "\t" <<
+				countArr[id - 1] << "\t" << priceArr[id - 1] << "\n" << "Название товара изменено\n\n";
+
+		}
+		else
+		{
+			std::cout << "Некорректный ввод!!\n\n";
+		}
+	}
+
+	
+}
+
+void DeleteProduct()
+{
+	std::string choose;
+	while (true)
+	{
+		std::cout << "1. Удалить товар\t0 - Выход\nВвод: ";
+		std::getline(std::cin, choose, '\n');
+		if (choose == "0")
+		{
+			break;
+		}
+		else if (choose == "1")
+		{
+			std::string idStr, newName;
+			int id{};
+
+			while (true)
+			{
+				std::cout << "Введите ID товара: ";
+				std::getline(std::cin, idStr, '\n');
+
+				if (isStringDigit(idStr))
+				{
+					id = std::stoi(idStr);
+					if (id > 0 && id <= size)
+					{
+						break;
+					}
+					else
+					{
+						std::cout << "Некорректный ID!!\n\n";
+					}
+				}
+				else
+				{
+					std::cout << "\nНекорректный ввод\n\n";
+				}
+			}
+
+
+			
+			int* tempId = new int[size];
+			int* tempCount = new int[size];
+			double* tempPrice = new double[size];
+			std::string* tempName = new std::string[size];
+			for (int i = 0; i < size; i++)
+			{
+				tempId[i] = idArr[i];
+				tempCount[i] = countArr[i];
+				tempPrice[i] = priceArr[i];
+				tempName[i] = nameArr[i];
+			}
+
+
+			delete[]idArr;
+			delete[]countArr;
+			delete[]priceArr;
+			delete[]nameArr;
+
+			size--;
+			idArr = new int[size];
+			countArr = new int[size];
+			priceArr = new double[size];
+			nameArr = new std::string[size];
+
+
+			for (int i = 0, j = 0; i < size, j < size; i++, j++)
+			{
+				if (i == id - 1)
+				{
+					i++;
+					idArr[j] = tempId[j];
+					countArr[j] = tempCount[i];
+					priceArr[j] = tempPrice[i];
+					nameArr[j] = tempName[i];
+				}
+				else
+				{
+					idArr[j] = tempId[j];
+					countArr[j] = tempCount[i];
+					priceArr[j] = tempPrice[i];
+					nameArr[j] = tempName[i];
+				}
+			}
+
+
+			delete[]tempId;
+			delete[]tempCount;
+			delete[]tempPrice;
+			delete[]tempName;
+			
+			break;
+		}
+	}
+}
+
+
+
+void Selling()
+{
+
 }
