@@ -51,6 +51,12 @@ std::string* nameCheckArr = new std::string[sizeCheck];
 
 
 
+// Касса------------------------------------------------------------------------------------
+double cash = 10000;
+double emony = 0;
+//------------------------------------------------------------------------------------------
+
+
 
 // Функции-----------------------------------------------------------------------------------
 void Start();
@@ -83,6 +89,7 @@ void DeleteProduct();
 
 void Selling();
 void AddCheckItem();
+void PrintCheck(double totalSum);
 
 
 //--------------------------------------------------------------------------------------------
@@ -1230,10 +1237,11 @@ void DeleteProduct()
 
 void Selling()
 {
-	std::string chooseId, chooseCount; 
+	std::string chooseId, chooseCount, choosePay;
 	int id{}, count{};
 	bool isFirst = true;
 	sizeCheck = 1;
+	double totalSum{};
 
 
 	delete[]priceCheckArr;
@@ -1246,7 +1254,7 @@ void Selling()
 	{
 		system("cls");
 		ShowCategoryStorage();
-		std::cout << "Введите ID товара для покупки или 0 для вызода: ";
+		std::cout << "Введите ID товара для покупки или 0 для выхода: ";
 		std::getline(std::cin, chooseId, '\n');
 		if (!isStringDigit(chooseId))
 		{
@@ -1258,7 +1266,39 @@ void Selling()
 			id = std::stoi(chooseId);
 			if (id == 0)
 			{
-				break;
+				if (!isFirst)
+				{
+					PrintCheck(totalSum);
+					while (true)
+					{
+						std::cout << "Выберите способ оплаты:\n1 - Наличные\n2 - Безналичные\nВвод: ";
+						std::getline(std::cin, choosePay, '\n');
+						if (!isStringDigit(choosePay))
+						{
+							std::cout << "Некорректный ввод\n\n";
+						}
+						else
+						{
+							if (std::stoi(choosePay) == 1)
+							{
+								//доделать
+							}
+							else if (std::stoi(choosePay) == 2)
+							{
+								//доделать
+							}
+							else
+							{
+								std::cout << "Некорректный ввод!!\n\n";
+							}
+						}
+					}
+					break;
+				}
+				else
+				{
+					break;
+				}
 			}
 			else if (id > 0 && id <= size)
 			{
@@ -1266,12 +1306,12 @@ void Selling()
 				{
 					std::cout << "Введите количество товара " << nameArr[id - 1] << ": ";
 					std::getline(std::cin, chooseCount, '\n');
-					if (!isStringDigit(chooseId))
+					if (!isStringDigit(chooseCount))
 					{
 						std::cout << "\n\nНекорректный ввод\n\n";
 						continue;
 					}
-					else
+					else if (isStringDigit(chooseCount))
 					{
 						count = std::stoi(chooseCount);
 						if (count > 0 && count <= countArr[id-1])
@@ -1283,7 +1323,9 @@ void Selling()
 								nameCheckArr[sizeCheck - 1] = nameArr[id - 1];
 								totalPriceCheckArr[sizeCheck - 1] = priceArr[id - 1]*count;
 								countCheckArr[sizeCheck - 1] = count;
+								totalSum += totalPriceCheckArr[sizeCheck - 1];
 								isFirst = false;
+								countArr[id - 1] -= count;
 							}
 							else
 							{
@@ -1292,12 +1334,19 @@ void Selling()
 								nameCheckArr[sizeCheck - 1] = nameArr[id - 1];
 								totalPriceCheckArr[sizeCheck - 1] = priceArr[id - 1] * count;
 								countCheckArr[sizeCheck - 1] = count;
+								totalSum += totalPriceCheckArr[sizeCheck - 1];
+								countArr[id - 1] -= count;
 							}
+							break;
 						}
 						else
 						{
-							std::cout << "\n\nНекорректный ввод\n\n";
+							std::cout << "\n\nНекорректное кол-во\n\n";
 						}
+					}
+					else
+					{
+						std::cout << "\n\nНекорректный ввод\n\n";
 					}
 				}
 			}
@@ -1350,4 +1399,14 @@ void AddCheckItem()
 	delete[]tempTotalPriceCheck;
 	delete[]tempNameCheck;
 	
+}
+
+void PrintCheck(double totalSum)
+{
+	std::cout << "№\tНазвание\t\t\tКоличество\tЦена за ед\tИтого\n";
+	for (int i = 0; i < sizeCheck; i++)
+	{
+		std::cout << i + 1 << "\t" << std::left << std::setw(30) << nameCheckArr[i] << "\t" << countCheckArr[i] << "\t" << priceCheckArr[i] << "\t\t" << totalPriceCheckArr[i] << "\n\n";
+	}
+	std::cout << "\n\n\tИтоговая сумма: " << totalSum << " рублей\n\n\n";
 }
