@@ -40,8 +40,15 @@ std::string* NameCategoryArr = new std::string[categorySize];
 //-------------------------------------------------------------------------------------------
 
 
+// Категории товаров -----------------------------------------------------------------------
+int firstCategory = 3;
+int secondCategory = 6;
+int thirdCategory = 8;
+//-------------------------------------------------------------------------------------------
 
-// Чек -----------------------------------------------------
+
+
+// Чек --------------------------------------------------------------------------------------
 int sizeCheck = 1;
 int* countCheckArr = new int[sizeCheck];
 double* priceCheckArr = new double[sizeCheck];
@@ -110,6 +117,11 @@ int main()
 	delete[]countArr;
 	delete[]priceArr;
 	delete[]NameCategoryArr;
+	/*delete[] sizeCheck;
+	int* countCheckArr = new int[sizeCheck];
+	double* priceCheckArr = new double[sizeCheck];
+	double* totalPriceCheckArr = new double[sizeCheck];
+	std::string* nameCheckArr = new std::string[sizeCheck];*/
 
 	return 0;
 }
@@ -297,31 +309,46 @@ void ShopUserMenu()
 
 		if (choose == "1")
 		{
-
+			Selling();
 		}
 		else if (choose == "2")
 		{
-			ShowStorage();
+			ShowCategoryStorage();
 		}
 		else if (choose == "3")
 		{
-
+			RefillStorage();
 		}
 		else if (choose == "4")
 		{
-
+			RemoveFromStorage();
 		}
 		else if (choose == "5")
 		{
-
+			Income();
 		}
 		else if (choose == "6")
 		{
-
-		}
-		else if (choose == "0")
-		{
-			break;
+			system("cls");
+			while (true)
+			{
+				std::cout << "1 - Закрыть смену\n2 - Отмена\nВвод: ";
+				std::getline(std::cin, choose, '\n');
+				if (isStringDigit(choose))
+				{
+					break;
+				}
+				else
+				{
+					std::cout << "\n\nНекорректный ввод!\n\n";
+				}
+			}
+			if (std::stoi(choose) == 1)
+			{
+				Income();
+				std::cout << "\nСмена закрыта. Удачи!\n\n";
+				break;
+			}
 		}
 		else
 		{
@@ -400,28 +427,28 @@ void ShowCategoryStorage()
 		if (choose == "1")
 		{
 
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < firstCategory;i++)
 			{
 				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t" << countArr[i] << std::left << std::setw(2) << "\t\t" << priceArr[i] << "\n";
 			}
 		}
 		else if (choose == "2")
 		{
-			for (int i = 3; i < 6; i++)
+			for (int i = firstCategory; i < secondCategory; i++)
 			{
 				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t" << countArr[i] << std::left << std::setw(2) << "\t\t" << priceArr[i] << "\n";
 			}
 		}
 		else if (choose == "3")
 		{
-			for (int i = 6; i < 8; i++)
+			for (int i = secondCategory; i < thirdCategory; i++)
 			{
 				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t" << countArr[i] << std::left << std::setw(2) << "\t\t" << priceArr[i] << "\n";
 			}
 		}
 		else if (choose == "4")
 		{
-			for (int i = 8; i < 10; i++)
+			for (int i = thirdCategory; i < size; i++)
 			{
 				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t" << countArr[i] << std::left << std::setw(2) << "\t\t" << priceArr[i] << "\n";
 			}
