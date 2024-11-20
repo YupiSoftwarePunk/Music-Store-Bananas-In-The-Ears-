@@ -54,6 +54,7 @@ std::string* nameCheckArr = new std::string[sizeCheck];
 // Касса------------------------------------------------------------------------------------
 double cash = 10000;
 double emony = 0;
+double cashMoney = 0;
 //------------------------------------------------------------------------------------------
 
 
@@ -90,6 +91,7 @@ void DeleteProduct();
 void Selling();
 void AddCheckItem();
 void PrintCheck(double totalSum);
+void Income();
 
 
 //--------------------------------------------------------------------------------------------
@@ -201,10 +203,10 @@ void ShopAdminMenu()
 			std::cout << "5. Изменить цену\n";
 			std::cout << "6. Изменить склад\n";
 			std::cout << "7. Изменить персонал\n";
-			std::cout << "8. Отчет о прибыли\n";
+			std::cout << "8. Отчет о прибыли\n\n";
 			std::cout << "0. Закрыть смену\n";
 
-			std::cout << "Ввод: ";
+			std::cout << "\nВвод: ";
 			std::getline(std::cin, choose, '\n');
 			system("cls");
 		} while (choose.size() > 1 || choose[0] < 48 || choose[0] > 56);
@@ -240,11 +242,30 @@ void ShopAdminMenu()
 		}
 		else if (choose == "8")
 		{
-
+			Income();
 		}
 		else if (choose == "0")
 		{
-			break;
+			system("cls");
+			while (true)
+			{
+				std::cout << "1 - Закрыть смену\n2 - Отмена\nВвод: ";
+				std::getline(std::cin, choose, '\n');
+				if (isStringDigit(choose))
+				{
+					break;
+				}
+				else
+				{
+					std::cout << "\n\nНекорректный ввод!\n\n";
+				}
+			}
+			if (std::stoi(choose) == 1)
+			{
+				Income();
+				std::cout << "\nСмена закрыта. Удачи!\n\n";
+				break;
+			}
 		}
 		else
 		{
@@ -416,6 +437,7 @@ void ShowCategoryStorage()
 	}
 }
 
+
 void RefillStorage()
 {
 	std::string idStr, addStr, choose;
@@ -507,6 +529,7 @@ void RefillStorage()
 	}
 }
 
+
 bool isStringDigit(std::string string)
 {
 	for (int i = 0; i < string.size(); i++)
@@ -517,6 +540,7 @@ bool isStringDigit(std::string string)
 		}
 	}
 }
+
 
 void RemoveFromStorage()
 {
@@ -660,7 +684,7 @@ void CgangePrice()
 			{
 				newPrice = std::stod(newPriceStr);
 
-				if (price >= 0 && price <= 100000)
+				if (price >= 0 && price <= 10000000)
 				{
 					break;
 				}
@@ -744,6 +768,7 @@ void ChangeStaff()
 	}
 }
 
+
 void AddEmployee()
 {
 	std::string* tempLogin = new std::string[userCount];
@@ -780,6 +805,7 @@ void AddEmployee()
 	delete[]tempLogin;
 	delete[]tempPass;
 }
+
 
 void StaffReduct()
 {
@@ -1237,7 +1263,7 @@ void DeleteProduct()
 
 void Selling()
 {
-	std::string chooseId, chooseCount, choosePay;
+	std::string chooseId, chooseCount, choosePay, userCash;
 	int id{}, count{};
 	bool isFirst = true;
 	sizeCheck = 1;
@@ -1249,11 +1275,16 @@ void Selling()
 	delete[]totalPriceCheckArr;
 	delete[]nameCheckArr;
 
+	priceCheckArr = new double[sizeCheck];
+	countCheckArr = new int[sizeCheck];
+	totalPriceCheckArr = new double[sizeCheck];
+	nameCheckArr = new std::string[sizeCheck];
+
 
 	while (true)
 	{
 		system("cls");
-		ShowCategoryStorage();
+		ShowStorage();
 		std::cout << "Введите ID товара для покупки или 0 для выхода: ";
 		std::getline(std::cin, chooseId, '\n');
 		if (!isStringDigit(chooseId))
@@ -1281,11 +1312,37 @@ void Selling()
 						{
 							if (std::stoi(choosePay) == 1)
 							{
-								//доделать
+								while (true)
+								{
+									std::cout << "Введите сумму наличных: ";
+									std::getline(std::cin, userCash, '\n');
+									if (!isStringDigit(userCash))
+									{
+										std::cout << "Некорректный ввод!!\n\n";
+									}
+									else
+									{
+										if (std::stod(userCash) < totalSum)
+										{
+											std::cout << "Недостаточно средств\n\n";
+										}
+										else if (cash >= std::stod(userCash) - totalSum)
+										{
+											std::cout << "\n\nВы дали: " << std::stod(userCash) << "\n\nОплата прошла успешно!\n\n" << "Сдача: " << std::stod(userCash) - totalSum << " руб.\n\n";
+											cashMoney += totalSum;
+											cash += std::stod(userCash);
+											cash -= std::stod(userCash) - totalSum;
+											break;
+										}
+									}
+								}
+								break;
 							}
 							else if (std::stoi(choosePay) == 2)
 							{
-								//доделать
+								std::cout << "Оплата прошла успешно!\n\n";
+								emony += totalSum;
+								break;
 							}
 							else
 							{
@@ -1314,14 +1371,14 @@ void Selling()
 					else if (isStringDigit(chooseCount))
 					{
 						count = std::stoi(chooseCount);
-						if (count > 0 && count <= countArr[id-1])
+						if (count > 0 && count <= countArr[id - 1])
 						{
 							std::cout << std::left << std::setw(30) << nameArr[id - 1] << " " << count << " добавлен в чек\n\n";
 							if (isFirst)
 							{
 								priceCheckArr[sizeCheck - 1] = priceArr[id - 1];
 								nameCheckArr[sizeCheck - 1] = nameArr[id - 1];
-								totalPriceCheckArr[sizeCheck - 1] = priceArr[id - 1]*count;
+								totalPriceCheckArr[sizeCheck - 1] = priceArr[id - 1] * count;
 								countCheckArr[sizeCheck - 1] = count;
 								totalSum += totalPriceCheckArr[sizeCheck - 1];
 								isFirst = false;
@@ -1358,9 +1415,10 @@ void Selling()
 	}
 }
 
+
 void AddCheckItem()
 {
-		
+
 	double* tempPriceCheck = new double[sizeCheck];
 	int* tempCountCheck = new int[sizeCheck];
 	double* tempTotalPriceCheck = new double[sizeCheck];
@@ -1398,15 +1456,27 @@ void AddCheckItem()
 	delete[]tempCountCheck;
 	delete[]tempTotalPriceCheck;
 	delete[]tempNameCheck;
-	
+
 }
+
 
 void PrintCheck(double totalSum)
 {
 	std::cout << "№\tНазвание\t\t\tКоличество\tЦена за ед\tИтого\n";
 	for (int i = 0; i < sizeCheck; i++)
 	{
-		std::cout << i + 1 << "\t" << std::left << std::setw(30) << nameCheckArr[i] << "\t" << countCheckArr[i] << "\t" << priceCheckArr[i] << "\t\t" << totalPriceCheckArr[i] << "\n\n";
+		std::cout << i + 1 << "\t" << std::left << std::setw(35) << nameCheckArr[i] << "\t" << countCheckArr[i] << "\t" << priceCheckArr[i] << "\t\t" << totalPriceCheckArr[i] << "\n\n";
 	}
 	std::cout << "\n\n\tИтоговая сумма: " << totalSum << " рублей\n\n\n";
+}
+
+
+
+void Income()
+{
+	std::cout << "\n\t\tОтчет о прибыли\n\n";
+	std::cout << "Прибыль за наличный рассчет:\t\t" << cashMoney << "\n";
+	std::cout << "Прибыль за безналичный расчет:\t\t" << emony << "\n";
+	std::cout << "Наличные на кассе:\t\t" << cash << "\n\n";
+	std::cout << "Итоговая выручка:\t\t" << cashMoney + emony << "\n\n";
 }
