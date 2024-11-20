@@ -97,7 +97,7 @@ void DeleteProduct();
 
 void Selling();
 void AddCheckItem();
-void PrintCheck(double totalSum);
+void PrintCheck(long double& totalSum);
 void Income();
 
 
@@ -1117,6 +1117,7 @@ void AddProduct()
 			delete[]tempCount;
 			delete[]tempPrice;
 			delete[]tempName;
+
 		}
 		else
 		{
@@ -1281,6 +1282,8 @@ void DeleteProduct()
 			delete[]tempPrice;
 			delete[]tempName;
 
+			size--;
+
 			break;
 		}
 	}
@@ -1294,7 +1297,7 @@ void Selling()
 	int id{}, count{};
 	bool isFirst = true;
 	sizeCheck = 1;
-	double totalSum{};
+	long double totalSum{};
 
 
 	delete[]priceCheckArr;
@@ -1327,6 +1330,7 @@ void Selling()
 				if (!isFirst)
 				{
 					PrintCheck(totalSum);
+					std::cout << "\n\n\tИтоговая сумма: " << totalSum << " рублей\n\n\n";
 					while (true)
 					{
 						std::cout << "Выберите способ оплаты:\n1 - Наличные\n2 - Безналичные\nВвод: ";
@@ -1397,7 +1401,7 @@ void Selling()
 					}
 					else if (isStringDigit(chooseCount))
 					{
-						count = std::stoi(chooseCount);
+						count = std::stod(chooseCount);
 						if (count > 0 && count <= countArr[id - 1])
 						{
 							std::cout << std::left << std::setw(30) << nameArr[id - 1] << " " << count << " добавлен в чек\n\n";
@@ -1407,7 +1411,7 @@ void Selling()
 								nameCheckArr[sizeCheck - 1] = nameArr[id - 1];
 								totalPriceCheckArr[sizeCheck - 1] = priceArr[id - 1] * count;
 								countCheckArr[sizeCheck - 1] = count;
-								totalSum += totalPriceCheckArr[sizeCheck - 1];
+								totalSum += priceArr[id - 1] * count;
 								isFirst = false;
 								countArr[id - 1] -= count;
 							}
@@ -1418,7 +1422,7 @@ void Selling()
 								nameCheckArr[sizeCheck - 1] = nameArr[id - 1];
 								totalPriceCheckArr[sizeCheck - 1] = priceArr[id - 1] * count;
 								countCheckArr[sizeCheck - 1] = count;
-								totalSum += totalPriceCheckArr[sizeCheck - 1];
+								totalSum += priceArr[id - 1] * count;
 								countArr[id - 1] -= count;
 							}
 							break;
@@ -1487,14 +1491,14 @@ void AddCheckItem()
 }
 
 
-void PrintCheck(double totalSum)
+void PrintCheck( long double &totalSum)
 {
 	std::cout << "№\tНазвание\t\t\tКоличество\tЦена за ед\tИтого\n";
 	for (int i = 0; i < sizeCheck; i++)
 	{
 		std::cout << i + 1 << "\t" << std::left << std::setw(35) << nameCheckArr[i] << "\t" << countCheckArr[i] << "\t" << priceCheckArr[i] << "\t\t" << totalPriceCheckArr[i] << "\n\n";
 	}
-	std::cout << "\n\n\tИтоговая сумма: " << totalSum << " рублей\n\n\n";
+	/*std::cout << "\n\n\tИтоговая сумма: " << totalSum << " рублей\n\n\n";*/
 }
 
 
