@@ -59,7 +59,7 @@ std::string* nameCheckArr = new std::string[sizeCheck];
 
 
 // Касса------------------------------------------------------------------------------------
-double cash = 10000;
+double cash = 100000;
 double emony = 0;
 double cashMoney = 0;
 //------------------------------------------------------------------------------------------
@@ -99,8 +99,10 @@ void Selling();
 void AddCheckItem();
 void PrintCheck(long double& totalSum);
 void Income();
+//-------------------------------------------------------------------------------------------
 
 
+// динамический склад
 //--------------------------------------------------------------------------------------------
 void CreateDynamicStorage();
 // -------------------------------------------------------------------------------------------
@@ -427,7 +429,7 @@ void ShowCategoryStorage()
 		if (choose == "1")
 		{
 
-			for (int i = 0; i < firstCategory;i++)
+			for (int i = 0; i < firstCategory; i++)
 			{
 				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t" << countArr[i] << std::left << std::setw(2) << "\t\t" << priceArr[i] << "\n";
 			}
@@ -726,7 +728,7 @@ void CgangePrice()
 		while (true)
 		{
 
-			std::cout << "Назначить " << nameArr[id - 1] << " новую цену " << newPrice << " ?";
+			std::cout << "Назначить " << nameArr[id - 1] << " новую цену " << std::fixed << newPrice << " ?";
 			std::cout << "1 - Да\t2 - Нет\t3 - Отмена\n\n";
 			std::getline(std::cin, choose, '\n');
 
@@ -1093,7 +1095,7 @@ void AddProduct()
 
 				if (isStringDigit(newPriceStr))
 				{
-					if (std::stod(newPriceStr) >= 0 && std::stod(newPriceStr) < 100000)
+					if (std::stod(newPriceStr) >= 0)
 					{
 						priceArr[size - 1] = std::stod(newPriceStr);
 						break;
@@ -1109,7 +1111,7 @@ void AddProduct()
 			idArr[size - 1] = size;
 
 			std::cout << "\n\n" << idArr[size - 1] << "\t" << std::left << std::setw(30) << nameArr[size - 1] << "\t" <<
-				countArr[size - 1] << "\t" << priceArr[size - 1] << "\n" << "Новый товар успешно добавлен\n\n";
+				countArr[size - 1] << "\t" << std::fixed <<priceArr[size - 1] << "\n" << "Новый товар успешно добавлен\n\n";
 
 
 
@@ -1330,7 +1332,7 @@ void Selling()
 				if (!isFirst)
 				{
 					PrintCheck(totalSum);
-					std::cout << "\n\n\tИтоговая сумма: " << totalSum << " рублей\n\n\n";
+					std::cout << "\n\n\tИтоговая сумма: " << std::fixed <<totalSum << " рублей\n\n\n";
 					while (true)
 					{
 						std::cout << "Выберите способ оплаты:\n1 - Наличные\n2 - Безналичные\nВвод: ";
@@ -1491,7 +1493,7 @@ void AddCheckItem()
 }
 
 
-void PrintCheck( long double &totalSum)
+void PrintCheck(long double& totalSum)
 {
 	std::cout << "№\tНазвание\t\t\tКоличество\tЦена за ед\tИтого\n";
 	for (int i = 0; i < sizeCheck; i++)
