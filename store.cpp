@@ -1316,7 +1316,7 @@ void Selling()
 	while (true)
 	{
 		system("cls");
-		ShowStorage();
+		ShowCategoryStorage();
 		std::cout << "Введите ID товара для покупки или 0 для выхода: ";
 		std::getline(std::cin, chooseId, '\n');
 		if (!isStringDigit(chooseId))
