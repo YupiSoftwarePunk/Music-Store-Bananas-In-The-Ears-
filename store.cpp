@@ -412,8 +412,6 @@ void ShowCategoryStorage()
 {
 	while (true)
 	{
-
-
 		std::string choose;
 		std::cout << "Категории\n\n";
 		for (int i = 0; i < categorySize; i++)
@@ -424,11 +422,12 @@ void ShowCategoryStorage()
 		std::cout << "\nВведите номер нужной категории товаров:\t0 - Выход\nВвод: ";
 		std::cin >> choose;
 
+		system("cls");
+
 		std::cout << "ID\tНазвание\t\tКоличество\tЦена\n";
 
 		if (choose == "1")
 		{
-
 			for (int i = 0; i < firstCategory; i++)
 			{
 				std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t" << countArr[i] << std::left << std::setw(2) << "\t\t" << priceArr[i] << "\n";
@@ -1009,7 +1008,7 @@ void AddProduct()
 	std::string choose12;
 	while (true)
 	{
-		std::cout << "1. Добавить новый товар\t0 - Выход\nВвод: ";
+		std::cout << "1 - Добавить новый товар\t0 - Выход\nВвод: ";
 		std::getline(std::cin, choose12, '\n');
 		if (choose12 == "0")
 		{
@@ -1198,7 +1197,7 @@ void DeleteProduct()
 	std::string choose;
 	while (true)
 	{
-		std::cout << "1. Удалить товар\t0 - Выход\nВвод: ";
+		std::cout << "1 - Удалить товар\t0 - Выход\nВвод: ";
 		std::getline(std::cin, choose, '\n');
 		if (choose == "0")
 		{
