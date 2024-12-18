@@ -799,6 +799,8 @@ void ChangeStaff()
 
 void AddEmployee()
 {
+	system("cls");
+
 	std::string* tempLogin = new std::string[userCount];
 	std::string* tempPass = new std::string[userCount];
 	for (int i = 0; i < userCount; i++)
@@ -837,6 +839,8 @@ void AddEmployee()
 
 void StaffReduct()
 {
+	system("cls");
+
 	std::string choose, newLogin, newPass;
 	int empId;
 	while (true)
@@ -893,7 +897,7 @@ void StaffReduct()
 
 void RemoveStaff()
 {
-
+	system("cls");
 
 	std::string choose;
 	int empId;
@@ -1005,6 +1009,7 @@ void StorageReduct()
 
 void AddProduct()
 {
+	system("cls");
 	std::string choose12;
 	while (true)
 	{
@@ -1110,7 +1115,7 @@ void AddProduct()
 			idArr[size - 1] = size;
 
 			std::cout << "\n\n" << idArr[size - 1] << "\t" << std::left << std::setw(30) << nameArr[size - 1] << "\t" <<
-				countArr[size - 1] << "\t" << std::fixed <<priceArr[size - 1] << "\n" << "Новый товар успешно добавлен\n\n";
+				countArr[size - 1] << "\t" << std::fixed << priceArr[size - 1] << "\n" << "Новый товар успешно добавлен\n\n";
 
 
 
@@ -1131,6 +1136,7 @@ void AddProduct()
 
 void RenameProduct()
 {
+	system("cls");
 	std::string choose;
 	std::string idStr, newName;
 	int id{};
@@ -1194,6 +1200,7 @@ void RenameProduct()
 
 void DeleteProduct()
 {
+	system("cls");
 	std::string choose;
 	while (true)
 	{
@@ -1285,6 +1292,8 @@ void DeleteProduct()
 
 			size--;
 
+			std::cout << "Товар успешно удален!!" << "\n";
+
 			break;
 		}
 	}
@@ -1331,7 +1340,7 @@ void Selling()
 				if (!isFirst)
 				{
 					PrintCheck(totalSum);
-					std::cout << "\n\n\tИтоговая сумма: " << std::fixed <<totalSum << " рублей\n\n\n";
+					std::cout << "\n\n\tИтоговая сумма: " << std::fixed << totalSum << " рублей\n\n\n";
 					while (true)
 					{
 						std::cout << "Выберите способ оплаты:\n1 - Наличные\n2 - Безналичные\nВвод: ";
