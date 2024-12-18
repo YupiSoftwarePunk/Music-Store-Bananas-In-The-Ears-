@@ -420,7 +420,7 @@ void ShowCategoryStorage()
 		}
 
 		std::cout << "\nВведите номер нужной категории товаров:\t0 - Выход\nВвод: ";
-		std::cin >> choose;
+		std::getline(std::cin, choose, '\n');
 
 		system("cls");
 
@@ -461,7 +461,11 @@ void ShowCategoryStorage()
 		else
 		{
 			std::cout << "\n\nТакого номера категории не существует!!\n\n";
+			continue;
 		}
+
+
+		break;
 	}
 }
 
@@ -1508,7 +1512,7 @@ void PrintCheck(long double& totalSum)
 	{
 		std::cout << i + 1 << "\t" << std::left << std::setw(35) << nameCheckArr[i] << "\t" << countCheckArr[i] << "\t" << priceCheckArr[i] << "\t\t" << totalPriceCheckArr[i] << "\n\n";
 	}
-	/*std::cout << "\n\n\tИтоговая сумма: " << totalSum << " рублей\n\n\n";*/
+	
 }
 
 
@@ -1517,7 +1521,7 @@ void Income()
 {
 	std::cout << "\n\t\tОтчет о прибыли\n\n";
 	std::cout << "Прибыль за наличный рассчет:\t\t" << cashMoney << "\n";
-	std::cout << "Прибыль за безналичный расчет:\t\t" << emony << "\n";
-	std::cout << "Наличные на кассе:\t\t" << cash << "\n\n";
-	std::cout << "Итоговая выручка:\t\t" << cashMoney + emony << "\n\n";
+	std::cout << "Прибыль за безналичный расчет:\t\t" << emony << "\n\n\n";
+	std::cout << "Наличные на кассе:\t\t\t" << cash << "\n\n";
+	std::cout << "Итоговая выручка:\t\t\t" << cashMoney + emony << "\n\n";
 }
