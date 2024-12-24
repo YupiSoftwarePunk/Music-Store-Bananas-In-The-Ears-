@@ -1330,8 +1330,8 @@ void Selling()
 	{
 		system("cls");
 		std::cout << "Желаете совершить покупки?\tВведите 1 - чтобы продолжить или 0 - для выхода\nВвод: ";
-		std::getline(std::cin, chooseId, '\n');
-		if (chooseId == "1")
+		std::getline(std::cin, tempChoose, '\n');
+		if (tempChoose == "1")
 		{
 			ShowCategoryStorage();
 			std::cout << "Введите ID товара для покупки: ";
