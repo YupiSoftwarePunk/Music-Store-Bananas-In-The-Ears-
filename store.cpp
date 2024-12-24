@@ -456,6 +456,7 @@ void ShowCategoryStorage()
 		}
 		else if (choose == "0")
 		{
+			system("cls");
 			break;
 		}
 		else
@@ -463,7 +464,6 @@ void ShowCategoryStorage()
 			std::cout << "\n\nТакого номера категории не существует!!\n\n";
 			continue;
 		}
-
 
 		break;
 	}
@@ -1456,6 +1456,7 @@ void Selling()
 			{
 				std::cout << "\n\nНекорректный ввод\n\n";
 			}
+			break;
 		}
 	}
 }
