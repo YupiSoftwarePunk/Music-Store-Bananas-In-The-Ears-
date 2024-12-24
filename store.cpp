@@ -1308,7 +1308,7 @@ void DeleteProduct()
 void Selling()
 {
 	std::string chooseId, chooseCount, choosePay, userCash;
-	std::string TempChoose;
+	std::string tempChoose;
 	int id{}, count{};
 	bool isFirst = true;
 	sizeCheck = 1;
@@ -1328,10 +1328,10 @@ void Selling()
 
 	while (true)
 	{
-		
+		system("cls");
 		std::cout << "Желаете совершить покупки?\tВведите 1 - чтобы продолжить или 0 - для выхода\nВвод: ";
-		std::getline(std::cin, TempChoose, '\n');
-		if (TempChoose == "1")
+		std::getline(std::cin, chooseId, '\n');
+		if (chooseId == "1")
 		{
 			ShowCategoryStorage();
 			std::cout << "Введите ID товара для покупки: ";
