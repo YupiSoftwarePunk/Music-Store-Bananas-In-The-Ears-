@@ -205,8 +205,6 @@ void ShopAdminMenu()
 {
 	while (true)
 	{
-
-
 		std::string choose;
 		do
 		{
@@ -791,6 +789,7 @@ void ChangeStaff()
 		}
 		else if (choose == "0")
 		{
+			system("cls");
 			break;
 		}
 		else
@@ -862,6 +861,7 @@ void StaffReduct()
 
 		if (choose == "0")
 		{
+			system("cls");
 			break;
 		}
 		else if (isStringDigit(choose))
@@ -920,6 +920,7 @@ void RemoveStaff()
 
 		if (choose == "0")
 		{
+			system("cls");
 			break;
 		}
 		else if (isStringDigit(choose) && choose != "1")
@@ -988,6 +989,7 @@ void StorageReduct()
 		std::getline(std::cin, choose, '\n');
 		if (choose == "0")
 		{
+			system("cls");
 			break;
 		}
 		else if (choose == "1")
@@ -1021,6 +1023,7 @@ void AddProduct()
 		std::getline(std::cin, choose12, '\n');
 		if (choose12 == "0")
 		{
+			system("cls");
 			break;
 		}
 		else if (choose12 == "1")
@@ -1151,6 +1154,7 @@ void RenameProduct()
 
 		if (choose == "0")
 		{
+			system("cls");
 			break;
 		}
 		else if (choose == "1")
@@ -1212,6 +1216,7 @@ void DeleteProduct()
 		std::getline(std::cin, choose, '\n');
 		if (choose == "0")
 		{
+			system("cls");
 			break;
 		}
 		else if (choose == "1")
