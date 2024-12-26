@@ -137,7 +137,6 @@ void Start()
 	std::cout << "\n\n\t\tБананы в ушах\n\n\n";
 	if (Login() == true)
 	{
-		/*std::cin.ignore(std::numeric_limits<std::streamsize>::max());*/
 		if (isAdmin == true)
 		{
 			std::string choose;
@@ -181,7 +180,7 @@ bool Login()
 		{
 			if (login == loginArr[i] && passw == passwordArr[i])
 			{
-				std::cout << "Добро пожаловать! " << loginArr[i] << "\n";
+				std::cout << "\n\n" << "Добро пожаловать! " << loginArr[i] << "\n\n\n";
 				isAdmin = false;
 				return true;
 			}
@@ -189,7 +188,7 @@ bool Login()
 
 		if (login == loginArr[0] && passw == passwordArr[0])
 		{
-			std::cout << "Добро пожаловать! " << loginArr[0] << "\n";
+			std::cout << "\n\n" << "Добро пожаловать! " << loginArr[0] << "\n\n\n";
 			isAdmin = true;
 			return true;
 		}
@@ -208,6 +207,7 @@ void ShopAdminMenu()
 		std::string choose;
 		do
 		{
+			system("cls");
 			std::cout << "1. Начать продажу\n";
 			std::cout << "2. Показать склад\n";
 			std::cout << "3. Пополнить склад\n";
