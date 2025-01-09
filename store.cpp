@@ -3,6 +3,7 @@
 #include <string>
 #include <limits>
 #include <iomanip>
+#include <vector>
 
 #if defined(max)
 #undef max
@@ -151,7 +152,7 @@ void Start()
 			}
 			else
 			{
-				// динамический склад   CreateDynamicStorage();
+				CreateDynamicStorage();
 			}
 			ShopAdminMenu();
 		}
@@ -228,7 +229,6 @@ void ShopAdminMenu()
 		else if (choose == "2")
 		{
 			ShowCategoryStorage();
-			/*ShowStorage();*/
 		}
 		else if (choose == "3")
 		{
@@ -452,6 +452,44 @@ void ShowCategoryStorage()
 		}
 
 		break;
+	}
+}
+
+
+
+void CreateDynamicStorage()
+{
+	std::string countChoice;
+	std::string item;
+
+	std::cout << "Введите количество товаров которое хотите добавить: ";
+	std::getline(std::cin, countChoice, '\n');
+
+	int cols = 4;
+	int rows;
+	rows = std::stoi(countChoice);
+
+	std::vector<std::vector<int>> matrix(rows, std::vector<int>(cols));
+
+	std::cout << "Введите элементы массива: ";
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			std::cout << "Элемент [" << i << "][" << j << "]: ";
+			std::getline(std::cin, item, '\n');
+		}
+	}
+
+
+	std::cout << "Ваш массив:\n";
+	for (const auto& row : matrix) 
+	{
+		for (const auto& elem : row) 
+		{
+			std::cout << elem << " ";
+		}
+		std::cout << std::endl;
 	}
 }
 
