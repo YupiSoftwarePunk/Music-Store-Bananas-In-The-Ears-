@@ -78,8 +78,6 @@ void FillStorage(Any staticArr, Any dynamicArr, int size);
 
 void ShowCategoryStorage();
 
-void ShowStorage();
-
 void RefillStorage();
 bool isStringDigit(std::string);
 void RemoveFromStorage();
@@ -395,16 +393,6 @@ void FillStorage(Any staticArr, Any dynamicArr, int size)
 	}
 }
 
-
-void ShowStorage()
-{
-	std::cout << "ID\tНазвание\t\t\tКоличество\tЦена\n";
-
-	for (int i = 0; i < size; i++)
-	{
-		std::cout << idArr[i] << "\t" << std::left << std::setw(20) << nameArr[i] << "\t\t" << countArr[i] << std::left << std::setw(9) << "\t" << priceArr[i] << "\n";
-	}
-}
 
 void ShowCategoryStorage()
 {
