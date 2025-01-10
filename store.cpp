@@ -468,6 +468,7 @@ struct Product
 
 void CreateDynamicStorage()
 {
+	system("cls");
 	std::string countChoice;
 	int numProducts{};
 
@@ -481,7 +482,7 @@ void CreateDynamicStorage()
 	}
 	else
 	{
-		std::vector<Product> dynamicArr;
+		std::vector<Product> dynamicArr;  // Тип вектора Product
 
 		for (int i = 0; i < numProducts; i++)
 		{
@@ -498,12 +499,14 @@ void CreateDynamicStorage()
 			std::cout << "Введите цену товара " << i + 1 << ": ";
 			std::cin >> product.price;
 
-			dynamicArr.push_back(product);
+			dynamicArr.push_back(product);       // Добавляем товар в вектор
 		}
 
 		std::cout << "Динамический список товаров: \n\n";
 		std::cout << "ID\tНазвание\tКол-во\tЦена\n";
-		for (const auto& product : dynamicArr) 
+		for (const auto& product : dynamicArr)          /*       перебор всех товаров в векторе dynamicArr. 
+														Используется const auto&, чтобы избежать копирования объектов
+														и обеспечить доступ только для чтения.                 */
 		{
 			std::cout << product.id << "\t"
 				<< product.name << "\t"
