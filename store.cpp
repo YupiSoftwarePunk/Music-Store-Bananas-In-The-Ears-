@@ -457,40 +457,61 @@ void ShowCategoryStorage()
 
 
 
+struct Product
+{
+	int id{};
+	std::string name;
+	int quantity{};
+	double price{};
+};
+
+
 void CreateDynamicStorage()
 {
 	std::string countChoice;
-	std::string item;
+	int numProducts{};
 
 	std::cout << "Введите количество товаров которое хотите добавить: ";
 	std::getline(std::cin, countChoice, '\n');
 
-	int cols = 4;
-	int rows;
-	rows = std::stoi(countChoice);
-
-	std::vector<std::vector<int>> matrix(rows, std::vector<int>(cols));
-
-	std::cout << "Введите элементы массива: ";
-	for (int i = 0; i < rows; i++)
+	numProducts = std::stoi(countChoice);
+	if (!isdigit(numProducts))
 	{
-		for (int j = 0; j < cols; j++)
+		std::cout << "Неверно введено количество товаров!\n\n";
+	}
+	else
+	{
+		std::vector<Product> dynamicArr;
+
+		for (int i = 0; i < numProducts; i++)
 		{
-			std::cout << "Элемент [" << i << "][" << j << "]: ";
-			std::getline(std::cin, item, '\n');
+			Product product;
+			product.id = i;
+
+			std::cin.ignore();
+			std::cout << "Введите название товара " << i + 1 << ": ";
+			std::cin >> product.name;
+
+			std::cout << "Введите количество товара " << i + 1 << ": ";
+			std::cin >> product.quantity;
+
+			std::cout << "Введите цену товара " << i + 1 << ": ";
+			std::cin >> product.price;
+
+			dynamicArr.push_back(product);
+		}
+
+		std::cout << "Динамический список товаров: \n\n";
+		std::cout << "ID\tНазвание\tКол-во\tЦена\n";
+		for (const auto& product : dynamicArr) 
+		{
+			std::cout << product.id << "\t"
+				<< product.name << "\t"
+				<< product.quantity << "\t"
+				<< product.price << " руб.\n";
 		}
 	}
-
-
-	std::cout << "Ваш массив:\n";
-	for (const auto& row : matrix) 
-	{
-		for (const auto& elem : row) 
-		{
-			std::cout << elem << " ";
-		}
-		std::cout << std::endl;
-	}
+	
 }
 
 
