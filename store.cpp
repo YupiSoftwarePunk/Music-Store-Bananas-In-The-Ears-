@@ -73,8 +73,8 @@ bool Login();
 void ShopUserMenu();
 void ShopAdminMenu();
 void CreateStaticStorage();
-template <typename Any>
 
+template <typename Any>
 void FillStorage(Any staticArr, Any dynamicArr, int size);
 
 void ShowCategoryStorage();
@@ -118,11 +118,6 @@ int main()
 	delete[]countArr;
 	delete[]priceArr;
 	delete[]NameCategoryArr;
-	/*delete[] sizeCheck;
-	int* countCheckArr = new int[sizeCheck];
-	double* priceCheckArr = new double[sizeCheck];
-	double* totalPriceCheckArr = new double[sizeCheck];
-	std::string* nameCheckArr = new std::string[sizeCheck];*/
 
 	return 0;
 }
@@ -289,8 +284,6 @@ void ShopUserMenu()
 {
 	while (true)
 	{
-
-
 		std::string choose;
 		do
 		{
@@ -303,6 +296,7 @@ void ShopUserMenu()
 
 			std::cout << "Ввод: ";
 			std::getline(std::cin, choose, '\n');
+
 		} while (choose.size() > 1 || choose[0] < 48 || choose[0] > 54);
 
 		if (choose == "1")
