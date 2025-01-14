@@ -1365,18 +1365,7 @@ void Selling()
 	sizeCheck = 1;
 	long double totalSum{};
 	double discount = 0.2;
-	double itemOnSale = 0.15;
 
-
-	delete[]priceCheckArr;
-	delete[]countCheckArr;
-	delete[]totalPriceCheckArr;
-	delete[]nameCheckArr;
-
-	priceCheckArr = new double[sizeCheck];
-	countCheckArr = new int[sizeCheck];
-	totalPriceCheckArr = new double[sizeCheck];
-	nameCheckArr = new std::string[sizeCheck];
 
 
 	while (true)
@@ -1386,152 +1375,177 @@ void Selling()
 		std::getline(std::cin, tempChoose, '\n');
 		if (tempChoose == "1")
 		{
-			ShowCategoryStorage();
-			std::cout << "Введите ID товара для покупки: ";
-			std::getline(std::cin, chooseId, '\n');
-			system("pause");
-			if (!isStringDigit(chooseId))
+			isFirst = true;
+			totalSum = 0;
+			delete[]priceCheckArr;
+			delete[]countCheckArr;
+			delete[]totalPriceCheckArr;
+			delete[]nameCheckArr;
+			sizeCheck = 1;
+			priceCheckArr = new double[sizeCheck];
+			countCheckArr = new int[sizeCheck];
+			totalPriceCheckArr = new double[sizeCheck];
+			nameCheckArr = new std::string[sizeCheck];
+
+
+			while (true)
 			{
-				std::cout << "\nНеверный ID\n";
-				continue;
-			}
-			else if (isStringDigit(chooseId))
-			{
-				id = std::stoi(chooseId);
-				if (id == 0)
+				ShowCategoryStorage();
+				std::cout << "Введите ID товара для покупки или 0 - для выхода\nВвод: "; // доп просьба на 0 иначе костыли придумывать
+				std::getline(std::cin, chooseId, '\n');
+				if (!isStringDigit(chooseId))
 				{
-					if (!isFirst)
+					std::cout << "\nНеверный ID\n";
+					continue;
+				}
+				else if (isStringDigit(chooseId))
+				{
+					id = std::stoi(chooseId);
+					if (id == 0)
 					{
-						if (totalSum >= 100000)
-						{
-							totalSum - (totalSum * discount);
-							continue;
-						}
-						PrintCheck(totalSum);
-						std::cout << "\n\n\tИтоговая сумма: " << std::fixed << totalSum << " рублей\n\n\n";
+						break;
+					}
+					else if (id > 0 && id <= size)
+					{
 						while (true)
 						{
-							std::cout << "Выберите способ оплаты:\n1 - Наличные\n2 - Безналичные\nВвод: ";
-							std::getline(std::cin, choosePay, '\n');
-							if (!isStringDigit(choosePay))
+							std::cout << "Введите количество товара " << nameArr[id - 1] << ": ";
+							std::getline(std::cin, chooseCount, '\n');
+							if (!isStringDigit(chooseCount))
 							{
-								std::cout << "Некорректный ввод\n\n";
+								std::cout << "\n\nНекорректный ввод\n\n";
+								continue;
 							}
-							else
+							else if (isStringDigit(chooseCount))
 							{
-								if (std::stoi(choosePay) == 1)
+								count = std::stod(chooseCount);
+								if (count > 0 && count <= countArr[id - 1])
 								{
-									while (true)
+									std::cout << std::left << std::setw(30) << nameArr[id - 1] << " " << count << " добавлен в чек\n\n";
+									if (isFirst)
 									{
-										std::cout << "Введите сумму наличных: ";
-										std::getline(std::cin, userCash, '\n');
-										if (!isStringDigit(userCash))
-										{
-											std::cout << "Некорректный ввод!!\n\n";
-										}
-										else
-										{
-											if (std::stod(userCash) < totalSum)
-											{
-												std::cout << "Недостаточно средств\n\n";
-											}
-											else if (cash >= std::stod(userCash) - totalSum)
-											{
-												std::cout << "\n\nВы дали: " << std::stod(userCash) << "\n\nОплата прошла успешно!\n\n" << "Сдача: " << std::stod(userCash) - totalSum << " руб.\n\n";
-												cashMoney += totalSum;
-												cash += std::stod(userCash);
-												cash -= std::stod(userCash) - totalSum;
-												break;
-											}
-										}
+										priceCheckArr[sizeCheck - 1] = priceArr[id - 1];
+										nameCheckArr[sizeCheck - 1] = nameArr[id - 1];
+										totalPriceCheckArr[sizeCheck - 1] = priceArr[id - 1] * count;
+										countCheckArr[sizeCheck - 1] = count;
+										totalSum += priceArr[id - 1] * count;
+										isFirst = false;
+										countArr[id - 1] -= count;
+									}
+									else
+									{
+										AddCheckItem();
+										priceCheckArr[sizeCheck - 1] = priceArr[id - 1];
+										nameCheckArr[sizeCheck - 1] = nameArr[id - 1];
+										totalPriceCheckArr[sizeCheck - 1] = priceArr[id - 1] * count;
+										countCheckArr[sizeCheck - 1] = count;
+										totalSum += priceArr[id - 1] * count;
+										countArr[id - 1] -= count;
 									}
 									break;
 								}
-								else if (std::stoi(choosePay) == 2)
-								{
-									std::cout << "Оплата прошла успешно!\n\n";
-									emony += totalSum;
-									break;
-								}
 								else
 								{
-									std::cout << "Некорректный ввод!!\n\n";
+									std::cout << "\n\nНекорректное кол-во\n\n";
 								}
-							}
-						}
-						break;
-					}
-					else
-					{
-						break;
-					}
-				}
-				else if (id == 10)
-				{
-					totalSum - (totalSum * itemOnSale);
-				}
-
-				else if (id > 0 && id <= size)
-				{
-					while (true)
-					{
-						std::cout << "Введите количество товара " << nameArr[id - 1] << ": ";
-						std::getline(std::cin, chooseCount, '\n');
-						if (!isStringDigit(chooseCount))
-						{
-							std::cout << "\n\nНекорректный ввод\n\n";
-							continue;
-						}
-						else if (isStringDigit(chooseCount))
-						{
-							count = std::stod(chooseCount);
-							if (count > 0 && count <= countArr[id - 1])
-							{
-								std::cout << std::left << std::setw(30) << nameArr[id - 1] << " " << count << " добавлен в чек\n\n";
-								if (isFirst)
-								{
-									priceCheckArr[sizeCheck - 1] = priceArr[id - 1];
-									nameCheckArr[sizeCheck - 1] = nameArr[id - 1];
-									totalPriceCheckArr[sizeCheck - 1] = priceArr[id - 1] * count;
-									countCheckArr[sizeCheck - 1] = count;
-									totalSum += priceArr[id - 1] * count;
-									isFirst = false;
-									countArr[id - 1] -= count;
-								}
-								else
-								{
-									AddCheckItem();
-									priceCheckArr[sizeCheck - 1] = priceArr[id - 1];
-									nameCheckArr[sizeCheck - 1] = nameArr[id - 1];
-									totalPriceCheckArr[sizeCheck - 1] = priceArr[id - 1] * count;
-									countCheckArr[sizeCheck - 1] = count;
-									totalSum += priceArr[id - 1] * count;
-									countArr[id - 1] -= count;
-								}
-								break;
 							}
 							else
 							{
-								std::cout << "\n\nНекорректное кол-во\n\n";
+								std::cout << "\n\nНекорректный ввод\n\n";
 							}
+						}
+					}
+					else
+					{
+						std::cout << "\n\nНекорректный ввод\n\n";
+					}
+					//break; был лишний
+
+				}
+				else if (chooseId == "0") // добавил это
+				{
+					break;
+				}
+
+
+			}
+
+			if (!isFirst)
+			{
+				if (totalSum >= 100000)
+				{
+					totalSum - (totalSum * discount);
+					//continue; ?
+				}
+				PrintCheck(totalSum);
+				std::cout << "\n\n\tИтоговая сумма: " << std::fixed << totalSum << " рублей\n\n\n";
+				while (true)
+				{
+					std::cout << "Выберите способ оплаты:\n1 - Наличные\n2 - Безналичные\nВвод: ";
+					std::getline(std::cin, choosePay, '\n');
+					if (!isStringDigit(choosePay))
+					{
+						std::cout << "Некорректный ввод\n\n";
+					}
+					else
+					{
+						if (std::stoi(choosePay) == 1)
+						{
+							while (true)
+							{
+								std::cout << "Введите сумму наличных: ";
+								std::getline(std::cin, userCash, '\n');
+								if (!isStringDigit(userCash))
+								{
+									std::cout << "Некорректный ввод!!\n\n";
+								}
+								else
+								{
+									if (std::stod(userCash) < totalSum)
+									{
+										std::cout << "Недостаточно средств\n\n";
+									}
+									else if (cash >= std::stod(userCash) - totalSum)
+									{
+										std::cout << "\n\nВы дали: " << std::stod(userCash) << "\n\nОплата прошла успешно!\n\n" << "Сдача: " << std::stod(userCash) - totalSum << " руб.\n\n";
+										cashMoney += totalSum;
+										cash += std::stod(userCash);
+										cash -= std::stod(userCash) - totalSum;
+										break;
+									}
+								}
+							}
+							break;
+						}
+						else if (std::stoi(choosePay) == 2)
+						{
+							std::cout << "Оплата прошла успешно!\n\n";
+							emony += totalSum;
+							break;
 						}
 						else
 						{
-							std::cout << "\n\nНекорректный ввод\n\n";
+							std::cout << "Некорректный ввод!!\n\n";
 						}
 					}
 				}
-				else
-				{
-					std::cout << "\n\nНекорректный ввод\n\n";
-				}
-				//break;
+
 			}
+			else
+			{
+				break;
+			}
+
+		}
+		else if (tempChoose == "0") // добавил это
+		{
+			break;
 		}
 		else
 		{
 			system("cls");
-			break;
+			std::cout << "\n\nНекорректный ввод\n\n";// добавил это
+
 		}
 	}
 }
