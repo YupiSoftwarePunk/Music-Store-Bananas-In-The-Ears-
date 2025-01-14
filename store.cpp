@@ -1365,6 +1365,7 @@ void Selling()
 	sizeCheck = 1;
 	long double totalSum{};
 	double discount = 0.2;
+	double itemOnSale = 0.15;
 
 
 	delete[]priceCheckArr;
@@ -1388,6 +1389,7 @@ void Selling()
 			ShowCategoryStorage();
 			std::cout << "Введите ID товара для покупки: ";
 			std::getline(std::cin, chooseId, '\n');
+			system("pause");
 			if (!isStringDigit(chooseId))
 			{
 				std::cout << "\nНеверный ID\n";
@@ -1464,6 +1466,11 @@ void Selling()
 						break;
 					}
 				}
+				else if (id == 10)
+				{
+					totalSum - (totalSum * itemOnSale);
+				}
+
 				else if (id > 0 && id <= size)
 				{
 					while (true)
