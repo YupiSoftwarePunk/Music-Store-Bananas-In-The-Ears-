@@ -1365,6 +1365,7 @@ void Selling()
 	sizeCheck = 1;
 	long double totalSum{};
 	double discount = 0.2;
+	double itemOnSale = 0.15;
 
 
 
@@ -1404,6 +1405,10 @@ void Selling()
 					if (id == 0)
 					{
 						break;
+					}
+					else if (id == 10)
+					{
+						totalSum - (totalSum * itemOnSale);
 					}
 					else if (id > 0 && id <= size)
 					{
@@ -1468,6 +1473,7 @@ void Selling()
 				}
 
 
+
 			}
 
 			if (!isFirst)
@@ -1475,7 +1481,6 @@ void Selling()
 				if (totalSum >= 100000)
 				{
 					totalSum - (totalSum * discount);
-					//continue; ?
 				}
 				PrintCheck(totalSum);
 				std::cout << "\n\n\tИтоговая сумма: " << std::fixed << totalSum << " рублей\n\n\n";
