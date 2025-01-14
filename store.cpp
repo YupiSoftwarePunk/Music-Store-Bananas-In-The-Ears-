@@ -497,14 +497,14 @@ void CreateDynamicStorage()
 			dynamicArr.push_back(product);       // Добавляем товар в вектор
 		}
 
-		std::cout << "Динамический список товаров: \n\n";
+		std::cout << "\n\nДинамический список товаров: \n\n";
 		std::cout << "ID\tНазвание\tКол-во\tЦена\n";
 		for (const auto& product : dynamicArr)          /*       перебор всех товаров в векторе dynamicArr.
 														Используется const auto&, чтобы избежать копирования объектов
 														и обеспечить доступ только для чтения.                 */
 		{
 			std::cout << product.id << "\t"
-				<< product.name << "\t"
+				<< product.name << "\t\t"
 				<< product.quantity << "\t"
 				<< product.price << " руб.\n";
 		}
@@ -1364,6 +1364,7 @@ void Selling()
 	bool isFirst = true;
 	sizeCheck = 1;
 	long double totalSum{};
+	double discount = 0.2;
 
 
 	delete[]priceCheckArr;
@@ -1399,6 +1400,11 @@ void Selling()
 				{
 					if (!isFirst)
 					{
+						if (totalSum >= 100000)
+						{
+							totalSum - (totalSum * discount);
+							continue;
+						}
 						PrintCheck(totalSum);
 						std::cout << "\n\n\tИтоговая сумма: " << std::fixed << totalSum << " рублей\n\n\n";
 						while (true)
