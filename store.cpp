@@ -467,10 +467,11 @@ void CreateDynamicStorage()
 	int numProducts{};
 
 	std::cout << "Введите количество товаров которое хотите добавить: ";
-	std::getline(std::cin, countChoice, '\n');
+	/*std::getline(std::cin, countChoice, '\n');*/
+	std::cin >> numProducts;
 
-	numProducts = std::stoi(countChoice);
-	if (!isdigit(numProducts))
+	/*numProducts = std::stoi(countChoice);*/
+	if (/*!isdigit(numProducts)*/ numProducts < 1)
 	{
 		std::cout << "Неверно введено количество товаров!\n\n";
 	}
@@ -507,6 +508,7 @@ void CreateDynamicStorage()
 				<< product.quantity << "\t"
 				<< product.price << " руб.\n";
 		}
+		system("pause");
 	}
 
 }
