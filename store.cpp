@@ -444,7 +444,7 @@ void ShowCategoryStorage()
 			std::cout << "\n\nТакого номера категории не существует!!\n\n";
 			continue;
 		}
-
+		system("pause");
 		break;
 	}
 }
@@ -498,7 +498,7 @@ void CreateDynamicStorage()
 
 		std::cout << "Динамический список товаров: \n\n";
 		std::cout << "ID\tНазвание\tКол-во\tЦена\n";
-		for (const auto& product : dynamicArr)          /*       перебор всех товаров в векторе dynamicArr. 
+		for (const auto& product : dynamicArr)          /*       перебор всех товаров в векторе dynamicArr.
 														Используется const auto&, чтобы избежать копирования объектов
 														и обеспечить доступ только для чтения.                 */
 		{
@@ -508,7 +508,7 @@ void CreateDynamicStorage()
 				<< product.price << " руб.\n";
 		}
 	}
-	
+
 }
 
 
@@ -1510,7 +1510,7 @@ void Selling()
 				{
 					std::cout << "\n\nНекорректный ввод\n\n";
 				}
-				break;
+				//break;
 			}
 		}
 		else
@@ -1573,7 +1573,7 @@ void PrintCheck(long double& totalSum)
 	{
 		std::cout << i + 1 << "\t" << std::left << std::setw(35) << nameCheckArr[i] << "\t" << countCheckArr[i] << "\t" << priceCheckArr[i] << "\t\t" << totalPriceCheckArr[i] << "\n\n";
 	}
-	
+
 }
 
 
