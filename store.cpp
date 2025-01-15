@@ -41,6 +41,7 @@ std::string* NameCategoryArr = new std::string[categorySize];
 //-------------------------------------------------------------------------------------------
 
 
+
 // Категории товаров -----------------------------------------------------------------------
 int firstCategory = 3;
 int secondCategory = 6;
@@ -101,10 +102,12 @@ void Income();
 //-------------------------------------------------------------------------------------------
 
 
+
 // динамический склад
 //--------------------------------------------------------------------------------------------
 void CreateDynamicStorage();
 // -------------------------------------------------------------------------------------------
+
 
 int main()
 {
@@ -128,7 +131,9 @@ void Start()
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
+
 	std::cout << "\n\n\t\tБананы в ушах\n\n\n";
+
 	if (Login() == true)
 	{
 		if (isAdmin == true)
@@ -467,11 +472,9 @@ void CreateDynamicStorage()
 	int numProducts{};
 
 	std::cout << "Введите количество товаров которое хотите добавить: ";
-	/*std::getline(std::cin, countChoice, '\n');*/
 	std::cin >> numProducts;
 
-	/*numProducts = std::stoi(countChoice);*/
-	if (/*!isdigit(numProducts)*/ numProducts < 1)
+	if (numProducts < 1)
 	{
 		std::cout << "Неверно введено количество товаров!\n\n";
 	}
@@ -522,7 +525,6 @@ void RefillStorage()
 
 	while (!exit)
 	{
-
 
 		while (true)
 		{
@@ -576,7 +578,6 @@ void RefillStorage()
 
 		while (true)
 		{
-
 			std::cout << "Добавить " << add << " товара(ов) " << nameArr[id - 1] << " ?";
 			std::cout << "1 - Да\t2 - Нет\t3 - Отмена\n\n";
 			std::getline(std::cin, choose, '\n');
@@ -852,6 +853,7 @@ void AddEmployee()
 
 	std::string* tempLogin = new std::string[userCount];
 	std::string* tempPass = new std::string[userCount];
+
 	for (int i = 0; i < userCount; i++)
 	{
 		tempLogin[i] = loginArr[i];
@@ -1256,6 +1258,7 @@ void DeleteProduct()
 {
 	system("cls");
 	std::string choose;
+
 	while (true)
 	{
 		std::cout << "1 - Удалить товар\t0 - Выход\nВвод: ";
@@ -1372,6 +1375,7 @@ void Selling()
 	while (true)
 	{
 		system("cls");
+
 		std::cout << "Желаете совершить покупки?\tВведите 1 - чтобы продолжить или 0 - для выхода\nВвод: ";
 		std::getline(std::cin, tempChoose, '\n');
 		if (tempChoose == "1")
@@ -1464,16 +1468,11 @@ void Selling()
 					{
 						std::cout << "\n\nНекорректный ввод\n\n";
 					}
-					//break; был лишний
-
 				}
 				else if (chooseId == "0") // добавил это
 				{
 					break;
 				}
-
-
-
 			}
 
 			if (!isFirst)
