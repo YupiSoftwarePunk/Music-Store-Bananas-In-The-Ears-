@@ -192,7 +192,6 @@ bool Login()
 			return true;
 		}
 
-
 		system("cls");
 		std::cout << "Неверно введен логин или пароль!!" << "\n\n";
 	}
@@ -219,6 +218,7 @@ void ShopAdminMenu()
 
 			std::cout << "\nВвод: ";
 			std::getline(std::cin, choose, '\n');
+
 			system("cls");
 		} while (choose.size() > 1 || choose[0] < 48 || choose[0] > 56);
 
@@ -399,6 +399,7 @@ void ShowCategoryStorage()
 	{
 		std::string choose;
 		std::cout << "Категории\n\n";
+
 		for (int i = 0; i < categorySize; i++)
 		{
 			std::cout << NameCategoryArr[i] << "\n";
@@ -877,6 +878,7 @@ void AddEmployee()
 	std::string newLogin, newPass;
 	std::cout << "Введите логин нового сотрудника: ";
 	std::getline(std::cin, newLogin, '\n');
+
 	std::cout << "Введите пароль нового сотрудника: ";
 	std::getline(std::cin, newPass, '\n');
 
@@ -1065,10 +1067,12 @@ void AddProduct()
 {
 	system("cls");
 	std::string choose12;
+
 	while (true)
 	{
 		std::cout << "1 - Добавить новый товар\t0 - Выход\nВвод: ";
 		std::getline(std::cin, choose12, '\n');
+
 		if (choose12 == "0")
 		{
 			system("cls");
@@ -1080,6 +1084,7 @@ void AddProduct()
 			int* tempCount = new int[size];
 			double* tempPrice = new double[size];
 			std::string* tempName = new std::string[size];
+
 			for (int i = 0; i < size; i++)
 			{
 				tempId[i] = idArr[i];
@@ -1195,6 +1200,7 @@ void RenameProduct()
 	std::string choose;
 	std::string idStr, newName;
 	int id{};
+
 	while (true)
 	{
 		std::cout << "1 - Изменить название\t0 - Выход\nВвод: ";
@@ -1263,6 +1269,7 @@ void DeleteProduct()
 	{
 		std::cout << "1 - Удалить товар\t0 - Выход\nВвод: ";
 		std::getline(std::cin, choose, '\n');
+
 		if (choose == "0")
 		{
 			system("cls");
@@ -1302,6 +1309,7 @@ void DeleteProduct()
 			int* tempCount = new int[size];
 			double* tempPrice = new double[size];
 			std::string* tempName = new std::string[size];
+
 			for (int i = 0; i < size; i++)
 			{
 				tempId[i] = idArr[i];
@@ -1369,8 +1377,6 @@ void Selling()
 	long double totalSum{};
 	double discount = 0.2;
 	double itemOnSale = 0.15;
-
-
 
 	while (true)
 	{
