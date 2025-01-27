@@ -1624,4 +1624,5 @@ void Income()
 	std::cout << "Прибыль за безналичный расчет:\t\t" << emony << "\n\n\n";
 	std::cout << "Наличные на кассе:\t\t\t" << cash << "\n\n";
 	std::cout << "Итоговая выручка:\t\t\t" << cashMoney + emony << "\n\n";
+	system("pause");
 }
