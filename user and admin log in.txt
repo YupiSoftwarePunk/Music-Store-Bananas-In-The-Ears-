@@ -1,0 +1,17 @@
+-- This file includes login and password for user and admin --
+
+*The choice determines which menu will be shown to you
+
+----------------------------------------------------------------
+For admin menu:
+
+Login: Admin
+Password: admin
+
+----------------------------------------------------------------
+For user menu:
+
+Login: User
+Password: user
+
+-----------------------------------------------------------------
